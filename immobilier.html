@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angy Company Immobilier | Vente, Location & Gestion de biens au Sénégal</title>
+<meta name="description" content="Angy Company Immobilier : achat, vente, location et gestion de terrains, villas, appartements, immeubles et locaux commerciaux au Sénégal.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+<style>
+:root{--red:#ff3131;--red2:#cc1f1f;--blue:#004aad;--blue2:#003580;--black:#ffffff;--dark:#f5f5f5;--dark2:#ffffff;--white:#1a1a1a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--black);color:#1a1a1a;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
+a{text-decoration:none;}
+button{font-family:inherit;}
+
+/* TOPBAR */
+.topbar{background:var(--red);padding:8px 5%;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;font-weight:600;letter-spacing:1px;color:white;flex-wrap:wrap;gap:4px;}
+.topbar-left{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.topbar span{opacity:0.95;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--blue);box-shadow:0 2px 20px rgba(0,0,0,0.1);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 5%;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;}
+.nav-logo-badge{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;color:#1a1a1a;line-height:1;}
+.nav-logo-badge span{color:var(--blue);}
+.nav-tag{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#888;display:block;}
+.nav-links{display:flex;gap:1.4rem;list-style:none;align-items:center;}
+.nav-links a{color:#555;text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;position:relative;}
+.nav-links a:hover{color:var(--blue);}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--blue);transition:width 0.3s;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--blue)!important;color:#fff!important;padding:9px 18px;border-radius:4px;}
+.nav-cta::after{display:none!important;}
+.nav-back{background:var(--red)!important;color:#1a1a1a!important;padding:9px 16px;border-radius:4px;}
+.nav-back::after{display:none!important;}
+@media(max-width:900px){.nav-links{display:none;}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:78px;left:0;right:0;background:rgba(255,255,255,0.99);padding:1.5rem 5%;gap:1rem;border-bottom:2px solid var(--blue);z-index:999;max-height:80vh;overflow-y:auto;}}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;}
+.hamburger span{width:26px;height:2px;background:#1a1a1a;transition:all 0.3s;display:block;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+@media(max-width:900px){.hamburger{display:flex;}}
+
+/* HERO */
+#accueil{min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:130px 5% 60px;background:linear-gradient(135deg,#f5f7ff 0%,#fff 55%);}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 75% 40%,rgba(0,74,173,0.08) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 10% 90%,rgba(255,49,49,0.06) 0%,transparent 60%);}
+.hero-content{position:relative;z-index:1;max-width:720px;}
+.hero-badge{display:inline-block;background:rgba(0,74,173,0.08);border:1px solid rgba(0,74,173,0.3);color:var(--blue);font-size:0.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:8px 18px;border-radius:30px;margin-bottom:1.5rem;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5.2rem);line-height:0.98;letter-spacing:1.5px;margin-bottom:1.3rem;}
+.hero-title .t2{color:var(--blue);display:block;}
+.hero-title .t3{color:var(--red);}
+.hero-sub{font-size:1.05rem;color:#444;line-height:1.7;max-width:560px;margin-bottom:2rem;}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem;}
+.stat-box{background:#fff;border:1px solid rgba(0,74,173,0.18);border-radius:10px;padding:0.9rem 1.4rem;text-align:center;box-shadow:0 2px 15px rgba(0,0,0,0.06);}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--blue);line-height:1;}
+.stat-lbl{font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;color:#888;margin-top:4px;}
+
+/* SEARCH BAR */
+.search-box{position:relative;z-index:2;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,20,60,0.15);padding:1.6rem;margin-top:-40px;max-width:1100px;margin-left:auto;margin-right:auto;border:1px solid rgba(0,0,0,0.05);}
+.search-tabs{display:flex;gap:0.5rem;margin-bottom:1.2rem;}
+.search-tab{flex:1;text-align:center;padding:10px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;background:#f5f5f5;color:#666;transition:all .25s;}
+.search-tab.active{background:var(--blue);color:#fff;}
+.search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.8rem;}
+.search-field label{display:block;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:#888;margin-bottom:5px;font-weight:700;}
+.search-field select,.search-field input{width:100%;padding:11px 12px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;font-family:inherit;font-size:0.85rem;color:#1a1a1a;background:#fafafa;}
+.search-field select:focus,.search-field input:focus{outline:none;border-color:var(--blue);background:#fff;}
+.search-btn-wrap{display:flex;align-items:flex-end;}
+.search-btn{width:100%;background:var(--red);color:#1a1a1a;border:none;padding:12px;border-radius:8px;font-weight:700;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;}
+.search-btn:hover{background:var(--red2);}
+
+/* SECTIONS */
+section{padding:80px 5%;}
+.sec-tag{font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:1rem;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:1.5px;line-height:1;margin-bottom:1rem;color:#1a1a1a;}
+.divider{width:55px;height:3px;background:var(--blue);margin-bottom:1.5rem;}
+.sec-desc{color:#666;font-size:0.95rem;line-height:1.7;max-width:560px;margin-bottom:2.5rem;}
+.sec-head-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+
+/* CATEGORIES */
+#categories{background:#fff;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.2rem;}
+.cat-card{background:#f5f7ff;border:1px solid rgba(0,74,173,0.1);border-radius:14px;padding:1.6rem 1.2rem;text-align:center;cursor:pointer;transition:all 0.3s;}
+.cat-card:hover{background:var(--blue);transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,74,173,0.25);}
+.cat-card:hover .cat-name,.cat-card:hover .cat-count{color:#fff;}
+.cat-icon{font-size:2.4rem;margin-bottom:0.7rem;}
+.cat-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1.5px;color:#1a1a1a;transition:color 0.3s;}
+.cat-count{font-size:0.72rem;color:#888;margin-top:3px;transition:color 0.3s;}
+
+/* LISTINGS */
+#biens{background:#f5f7ff;}
+.listing-filters{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2rem;}
+.lf-btn{padding:8px 16px;border-radius:20px;border:1px solid rgba(0,74,173,0.25);background:#fff;color:#444;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all .25s;}
+.lf-btn.active,.lf-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+.biens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.6rem;}
+.bcard{background:#fff;border:1px solid rgba(0,0,0,0.06);box-shadow:0 2px 15px rgba(0,0,0,0.06);border-radius:14px;overflow:hidden;transition:all 0.3s;cursor:pointer;}
+.bcard:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(0,74,173,0.15);border-color:rgba(0,74,173,0.3);}
+.bcard-img{height:200px;background:#eef1fb linear-gradient(135deg,#eef1fb,#e4e9fb);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.bcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.bcard:hover .bcard-img img{transform:scale(1.07);}
+.bcard-noimg{font-size:2.6rem;opacity:0.35;}
+.bcard-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#1a1a1a;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;}
+.bcard-body{padding:1.1rem 1.2rem 1.3rem;}
+.bcard-type{font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:0.4rem;}
+.bcard-title{font-weight:700;font-size:1rem;color:#1a1a1a;margin-bottom:0.4rem;line-height:1.35;}
+.bcard-loc{font-size:0.78rem;color:#888;margin-bottom:0.8rem;display:flex;align-items:center;gap:4px;}
+.bcard-specs{display:flex;gap:1rem;font-size:0.75rem;color:#666;margin-bottom:0.9rem;flex-wrap:wrap;}
+.bcard-price{color:var(--red);font-weight:700;font-size:1.15rem;padding-top:0.8rem;border-top:1px solid rgba(0,0,0,0.06);}
+.bcard-price small{color:#888;font-weight:400;font-size:0.7rem;}
+.empty-state{text-align:center;padding:3rem 1rem;color:#888;font-size:0.9rem;grid-column:1/-1;}
+.load-more-wrap{text-align:center;margin-top:2.2rem;}
+.btn-out-blue{border:1px solid var(--blue);color:var(--blue);padding:12px 30px;border-radius:6px;font-weight:700;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;background:transparent;cursor:pointer;transition:all .3s;}
+.btn-out-blue:hover{background:var(--blue);color:#fff;}
+
+/* SERVICES */
+#services{background:#fff;}
+.serv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.3rem;}
+.serv-card{border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:1.6rem;transition:all .3s;}
+.serv-card:hover{border-color:rgba(0,74,173,0.4);transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,74,173,0.1);}
+.serv-icon{font-size:2rem;margin-bottom:0.8rem;}
+.serv-name{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:1.5px;margin-bottom:0.5rem;color:#1a1a1a;}
+.serv-desc{font-size:0.82rem;color:#666;line-height:1.6;}
+
+/* ABOUT */
+#apropos{background:var(--dark);}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+.about-text p{color:#555;line-height:1.8;margin-bottom:1.2rem;font-size:0.95rem;}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+.value-box{background:#fff;border-radius:12px;padding:1.2rem;border:1px solid rgba(0,74,173,0.1);}
+.value-box .vt{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:var(--blue);margin-bottom:0.3rem;}
+.value-box .vd{font-size:0.78rem;color:#666;line-height:1.5;}
+.about-photo{background:linear-gradient(135deg,var(--blue),var(--blue2));border-radius:18px;min-height:340px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:2rem;box-shadow:0 20px 50px rgba(0,74,173,0.25);}
+.about-photo-inner{max-width:280px;}
+.about-photo-icon{font-size:3rem;margin-bottom:1rem;}
+.about-photo h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1.5px;margin-bottom:0.6rem;}
+.about-photo p{font-size:0.85rem;opacity:0.9;line-height:1.6;}
+
+/* DEPOSER UN BIEN */
+#deposer{background:linear-gradient(135deg,rgba(0,74,173,0.05),rgba(255,49,49,0.04));}
+.deposit-box{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;box-shadow:0 15px 45px rgba(0,0,0,0.08);padding:2.5rem;border:1px solid rgba(0,0,0,0.05);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr;}}
+.form-field{margin-bottom:1rem;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{display:block;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:#666;font-weight:700;margin-bottom:6px;}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:12px 14px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-family:inherit;font-size:0.9rem;background:#fafafa;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--blue);background:#fff;}
+.form-field textarea{resize:vertical;min-height:90px;}
+.form-submit{background:var(--blue);color:#fff;border:none;padding:14px 36px;border-radius:8px;font-weight:700;font-size:0.9rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:0.5rem;}
+.form-submit:hover{background:var(--blue2);}
+.form-note{font-size:0.78rem;color:#888;margin-top:1rem;line-height:1.5;}
+.form-success{display:none;background:#e8f5e9;border:1px solid #4caf50;color:#2e7d32;padding:1rem 1.3rem;border-radius:10px;margin-bottom:1.2rem;font-size:0.88rem;}
+.form-error{display:none;background:#ffebee;border:1px solid #ef5350;color:#c62828;padding:1rem 1.3rem;border-radius:10px;margin-bottom:1.2rem;font-size:0.88rem;}
+
+/* CONTACT */
+#contact{background:#fff;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+.contact-items{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.citem{display:flex;align-items:center;gap:1rem;background:#f5f7ff;border-radius:12px;padding:1rem 1.2rem;text-decoration:none;color:inherit;transition:all .3s;}
+.citem:hover{transform:translateX(4px);background:#eaf0ff;}
+.cicon{width:44px;height:44px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
+.clbl{font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#888;}
+.cval{font-weight:700;font-size:0.92rem;color:#1a1a1a;}
+#mapContact{height:280px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,15,30,0.7);z-index:2000;padding:2vh 3vw;overflow-y:auto;}
+.modal-overlay.open{display:block;}
+.modal-box{background:#fff;max-width:920px;margin:0 auto;border-radius:16px;overflow:hidden;position:relative;}
+.modal-close{position:absolute;top:14px;right:14px;width:38px;height:38px;background:rgba(0,0,0,0.55);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;z-index:5;}
+.modal-gallery{position:relative;height:360px;background:#eef1fb;display:flex;align-items:center;justify-content:center;}
+.modal-gallery img{width:100%;height:100%;object-fit:cover;}
+.modal-gallery-noimg{font-size:4rem;opacity:0.3;}
+.modal-gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;background:rgba(0,0,0,0.45);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;}
+.modal-gallery-nav.prev{left:12px;}
+.modal-gallery-nav.next{right:12px;}
+.modal-gallery-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
+.modal-gallery-dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.55);}
+.modal-gallery-dots span.active{background:#fff;}
+.modal-content{padding:1.8rem 2rem 2.2rem;}
+.modal-type{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:0.4rem;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;margin-bottom:0.3rem;color:#1a1a1a;}
+.modal-loc{color:#888;font-size:0.9rem;margin-bottom:1rem;}
+.modal-price{color:var(--red);font-weight:700;font-size:1.6rem;margin-bottom:1.2rem;}
+.modal-specs{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.4rem;padding:1rem 0;border-top:1px solid rgba(0,0,0,0.07);border-bottom:1px solid rgba(0,0,0,0.07);}
+.modal-spec{text-align:center;}
+.modal-spec .msn{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--blue);}
+.modal-spec .msl{font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:#888;}
+.modal-desc{color:#555;line-height:1.75;font-size:0.92rem;margin-bottom:1.4rem;white-space:pre-line;}
+#modalMap{height:220px;border-radius:12px;overflow:hidden;margin-bottom:1.4rem;display:none;}
+.modal-actions{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.modal-btn{flex:1;min-width:150px;text-align:center;padding:13px;border-radius:8px;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;transition:all .3s;}
+.modal-btn.wa{background:#25D366;color:#fff;}
+.modal-btn.wa:hover{background:#128C7E;}
+.modal-btn.rdv{background:var(--blue);color:#fff;}
+.modal-btn.rdv:hover{background:var(--blue2);}
+
+/* RDV MODAL */
+.rdv-box{background:#fff;max-width:440px;margin:8vh auto 0;border-radius:16px;padding:2rem;position:relative;}
+
+/* FOOTER (shared) */
+footer{background:#fff;border-top:2px solid var(--blue);box-shadow:0 -2px 15px rgba(0,0,0,0.06);}
+.footer-top{padding:40px 5%;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;}
+.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1.5px;margin-bottom:0.8rem;color:#1a1a1a;}
+.footer-col a{display:block;font-size:0.8rem;color:#777;text-decoration:none;margin-bottom:0.5rem;transition:color .3s;}
+.footer-col a:hover{color:var(--blue);}
+.footer-bottom{border-top:1px solid rgba(0,0,0,0.08);padding:20px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fcopy{font-size:0.78rem;color:#888;}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{font-size:0.75rem;color:#888;text-decoration:none;transition:color 0.3s;}
+.footer-links a:hover{color:var(--blue);}
+
+/* FLOAT */
+.wa-float{position:fixed;bottom:28px;right:28px;background:#25D366;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 5px 25px rgba(37,211,102,0.45);z-index:999;text-decoration:none;transition:transform 0.3s;animation:wapulse 2s infinite;}
+.wa-float:hover{transform:scale(1.12);}
+@keyframes wapulse{0%,100%{box-shadow:0 5px 25px rgba(37,211,102,0.45);}50%{box-shadow:0 5px 40px rgba(37,211,102,0.7);}}
+
+.fadein{animation:fadein .8s ease both;}
+@keyframes fadein{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Parcelles Assainies U18, Dakar</span>
+    <span>📞 +221 71 053 89 17</span>
+  </div>
+  <span>🏠 Angy Company Immobilier</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#accueil" class="nav-logo">
+      <div>
+        <span class="nav-logo-badge">ANGY <span>IMMO</span></span>
+        <span class="nav-tag">Company Immobilier</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#categories">Catégories</a></li>
+      <li><a href="#biens">Biens</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#deposer">Déposer un bien</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+      <li><a href="index.html" class="nav-back">iPhones ↗</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-content fadein">
+    <div class="hero-badge">📍 Sénégal · Vente · Location · Gestion</div>
+    <h1 class="hero-title">Trouvez votre<span class="t2">bien idéal</span>avec <span class="t3">Angy</span> Immobilier</h1>
+    <p class="hero-sub">Terrains, villas, appartements, immeubles et locaux commerciaux : achetez, vendez, louez ou faites gérer votre patrimoine immobilier au Sénégal en toute confiance.</p>
+    <div class="hero-stats">
+      <div class="stat-box"><div class="stat-num" id="statBiens">–</div><div class="stat-lbl">Biens disponibles</div></div>
+      <div class="stat-box"><div class="stat-num">7</div><div class="stat-lbl">Catégories</div></div>
+      <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Accompagnement</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-box fadein">
+  <div class="search-tabs">
+    <div class="search-tab active" data-transaction="">Tout</div>
+    <div class="search-tab" data-transaction="vente">Acheter</div>
+    <div class="search-tab" data-transaction="location">Louer</div>
+  </div>
+  <div class="search-grid">
+    <div class="search-field">
+      <label>Type de bien</label>
+      <select id="fType">
+        <option value="">Tous les types</option>
+        <option value="terrain">Terrain</option>
+        <option value="maison">Maison</option>
+        <option value="villa">Villa</option>
+        <option value="appartement">Appartement</option>
+        <option value="immeuble">Immeuble</option>
+        <option value="local_commercial">Local commercial</option>
+        <option value="bureau">Bureau</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Ville</label>
+      <input type="text" id="fVille" placeholder="Dakar, Saly, Thiès...">
+    </div>
+    <div class="search-field">
+      <label>Budget max (FCFA)</label>
+      <input type="number" id="fBudget" placeholder="Ex: 50000000">
+    </div>
+    <div class="search-field">
+      <label>Chambres min</label>
+      <select id="fChambres">
+        <option value="">Indifférent</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+        <option value="5">5+</option>
+      </select>
+    </div>
+    <div class="search-btn-wrap">
+      <button class="search-btn" onclick="applySearch()">🔍 Rechercher</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="sec-tag">Explorer</div>
+  <h2 class="sec-title">Nos catégories de biens</h2>
+  <div class="divider"></div>
+  <p class="sec-desc">Parcourez notre sélection par type de bien pour trouver exactement ce que vous cherchez.</p>
+  <div class="cat-grid" id="catGrid">
+    <div class="cat-card" data-type="terrain"><div class="cat-icon">🗺️</div><div class="cat-name">Terrains</div><div class="cat-count" data-count-for="terrain">–</div></div>
+    <div class="cat-card" data-type="maison"><div class="cat-icon">🏠</div><div class="cat-name">Maisons</div><div class="cat-count" data-count-for="maison">–</div></div>
+    <div class="cat-card" data-type="villa"><div class="cat-icon">🏡</div><div class="cat-name">Villas</div><div class="cat-count" data-count-for="villa">–</div></div>
+    <div class="cat-card" data-type="appartement"><div class="cat-icon">🏢</div><div class="cat-name">Appartements</div><div class="cat-count" data-count-for="appartement">–</div></div>
+    <div class="cat-card" data-type="immeuble"><div class="cat-icon">🏬</div><div class="cat-name">Immeubles</div><div class="cat-count" data-count-for="immeuble">–</div></div>
+    <div class="cat-card" data-type="local_commercial"><div class="cat-icon">🏪</div><div class="cat-name">Locaux commerciaux</div><div class="cat-count" data-count-for="local_commercial">–</div></div>
+    <div class="cat-card" data-type="bureau"><div class="cat-icon">💼</div><div class="cat-name">Bureaux</div><div class="cat-count" data-count-for="bureau">–</div></div>
+  </div>
+</section>
+
+<!-- BIENS -->
+<section id="biens">
+  <div class="sec-head-row">
+    <div>
+      <div class="sec-tag">Notre sélection</div>
+      <h2 class="sec-title" style="margin-bottom:0;">Biens disponibles</h2>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="listing-filters" id="listingFilters">
+    <div class="lf-btn active" data-transaction="">Tous</div>
+    <div class="lf-btn" data-transaction="vente">À vendre</div>
+    <div class="lf-btn" data-transaction="location">À louer</div>
+  </div>
+  <div class="biens-grid" id="biensGrid">
+    <div class="empty-state">Chargement des biens...</div>
+  </div>
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+    <button class="btn-out-blue" onclick="loadMore()">Voir plus de biens</button>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-tag">Ce que nous faisons</div>
+  <h2 class="sec-title">Nos services</h2>
+  <div class="divider"></div>
+  <p class="sec-desc">Un accompagnement complet à chaque étape de votre projet immobilier.</p>
+  <div class="serv-grid">
+    <div class="serv-card"><div class="serv-icon">🏷️</div><div class="serv-name">Vente</div><div class="serv-desc">Mise en valeur et vente de vos biens au meilleur prix, avec un accompagnement jusqu'à la signature.</div></div>
+    <div class="serv-card"><div class="serv-icon">🔑</div><div class="serv-name">Achat</div><div class="serv-desc">Recherche personnalisée du bien qui correspond à votre budget et vos critères.</div></div>
+    <div class="serv-card"><div class="serv-icon">📋</div><div class="serv-name">Location</div><div class="serv-desc">Mise en location rapide et sécurisée, avec sélection rigoureuse des locataires.</div></div>
+    <div class="serv-card"><div class="serv-icon">🛠️</div><div class="serv-name">Gestion immobilière</div><div class="serv-desc">Gestion locative complète : encaissement, entretien, suivi administratif.</div></div>
+    <div class="serv-card"><div class="serv-icon">📊</div><div class="serv-name">Estimation</div><div class="serv-desc">Évaluation gratuite et précise de la valeur de votre bien sur le marché actuel.</div></div>
+    <div class="serv-card"><div class="serv-icon">💬</div><div class="serv-name">Conseil</div><div class="serv-desc">Accompagnement et conseils personnalisés pour sécuriser votre investissement.</div></div>
+  </div>
+</section>
+
+<!-- A PROPOS -->
+<section id="apropos">
+  <div class="about-grid">
+    <div class="about-text fadein">
+      <div class="sec-tag">Qui sommes-nous</div>
+      <h2 class="sec-title">Angy Company Immobilier</h2>
+      <div class="divider"></div>
+      <p>Angy Company Immobilier accompagne particuliers et investisseurs dans tous leurs projets immobiliers au Sénégal : achat, vente, location et gestion de biens.</p>
+      <p>Notre mission est de rendre chaque transaction simple, transparente et sécurisée, en mettant notre connaissance du marché local au service de vos objectifs.</p>
+      <div class="value-grid">
+        <div class="value-box"><div class="vt">Mission</div><div class="vd">Faciliter l'accès à la propriété et à la location au Sénégal.</div></div>
+        <div class="value-box"><div class="vt">Vision</div><div class="vd">Devenir une référence de l'immobilier de confiance au Sénégal.</div></div>
+        <div class="value-box"><div class="vt">Valeurs</div><div class="vd">Intégrité, transparence et sens du service.</div></div>
+        <div class="value-box"><div class="vt">Engagement</div><div class="vd">Un suivi personnalisé du premier contact à la remise des clés.</div></div>
+      </div>
+    </div>
+    <div class="about-photo fadein">
+      <div class="about-photo-inner">
+        <div class="about-photo-icon">🏘️</div>
+        <h3>Votre partenaire immobilier</h3>
+        <p>De la recherche du bien idéal à la gestion locative, nous vous accompagnons à chaque étape avec sérieux et proximité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOSER UN BIEN -->
+<section id="deposer">
+  <div class="sec-tag" style="text-align:center;">Propriétaires</div>
+  <h2 class="sec-title" style="text-align:center;">Déposez votre bien</h2>
+  <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
+  <p class="sec-desc" style="text-align:center;margin-left:auto;margin-right:auto;">Vous êtes propriétaire ? Proposez votre bien à la vente ou à la location. Après vérification, il sera publié sur notre plateforme.</p>
+  <div class="deposit-box">
+    <div class="form-success" id="depositSuccess">✅ Merci ! Votre bien a été soumis. Notre équipe le vérifiera avant publication.</div>
+    <div class="form-error" id="depositError">❌ Une erreur est survenue. Merci de réessayer ou de nous contacter par WhatsApp.</div>
+    <form id="depositForm" class="form-grid" onsubmit="submitDeposit(event)">
+      <div class="form-field"><label>Type de bien *</label>
+        <select id="dType" required>
+          <option value="">Sélectionner</option>
+          <option value="terrain">Terrain</option>
+          <option value="maison">Maison</option>
+          <option value="villa">Villa</option>
+          <option value="appartement">Appartement</option>
+          <option value="immeuble">Immeuble</option>
+          <option value="local_commercial">Local commercial</option>
+          <option value="bureau">Bureau</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Transaction *</label>
+        <select id="dTransaction" required>
+          <option value="">Sélectionner</option>
+          <option value="vente">Vente</option>
+          <option value="location">Location</option>
+        </select>
+      </div>
+      <div class="form-field full"><label>Titre de l'annonce *</label><input type="text" id="dTitre" placeholder="Ex: Belle villa 4 chambres à Saly" required></div>
+      <div class="form-field"><label>Ville *</label><input type="text" id="dVille" required></div>
+      <div class="form-field"><label>Quartier</label><input type="text" id="dQuartier"></div>
+      <div class="form-field"><label>Prix (FCFA) *</label><input type="number" id="dPrix" required></div>
+      <div class="form-field"><label>Superficie (m²)</label><input type="number" id="dSuperficie"></div>
+      <div class="form-field"><label>Chambres</label><input type="number" id="dChambres" min="0"></div>
+      <div class="form-field"><label>Salles de bain</label><input type="number" id="dSallesBain" min="0"></div>
+      <div class="form-field full"><label>Description</label><textarea id="dDescription" placeholder="Décrivez votre bien..."></textarea></div>
+      <div class="form-field"><label>Votre nom *</label><input type="text" id="dNom" required></div>
+      <div class="form-field"><label>Votre téléphone *</label><input type="text" id="dTelephone" required></div>
+      <div class="form-field full"><button type="submit" class="form-submit">Soumettre mon bien</button></div>
+    </form>
+    <div class="form-note">📌 Votre annonce sera examinée par notre équipe avant d'être publiée sur le site. Vous serez contacté(e) au numéro fourni pour toute précision.</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-tag">Nous contacter</div>
+  <h2 class="sec-title">Parlons de votre projet</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="fadein">
+      <div class="contact-items">
+        <a href="https://wa.me/221710538917?text=Bonjour%20Angy%20Company%20Immobilier%2C%20j%27ai%20une%20question." target="_blank" class="citem"><div class="cicon">💬</div><div><div class="clbl">WhatsApp</div><div class="cval">+221 71 053 89 17</div></div></a>
+        <a href="tel:+221710538917" class="citem"><div class="cicon">📞</div><div><div class="clbl">Téléphone</div><div class="cval">+221 71 053 89 17</div></div></a>
+        <div class="citem"><div class="cicon">📍</div><div><div class="clbl">Adresse</div><div class="cval">Parcelles Assainies U18, Dakar</div></div></div>
+      </div>
+      <a href="https://wa.me/221710538917?text=Bonjour%20Angy%20Company%20Immobilier%2C%20je%20souhaite%20prendre%20rendez-vous%20pour%20une%20visite." target="_blank" class="search-btn" style="display:inline-block;text-decoration:none;padding:14px 34px;">📅 Prendre rendez-vous</a>
+    </div>
+    <div id="mapContact" class="fadein"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col" style="max-width:260px;">
+      <span class="nav-logo-badge">ANGY <span style="color:var(--blue);">IMMO</span></span>
+      <p style="font-size:0.8rem;color:#888;margin-top:0.7rem;line-height:1.6;">Votre partenaire pour l'achat, la vente, la location et la gestion de biens immobiliers au Sénégal.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Catégories</h4>
+      <a href="#biens" onclick="filterByType('terrain')">Terrains</a>
+      <a href="#biens" onclick="filterByType('villa')">Villas</a>
+      <a href="#biens" onclick="filterByType('appartement')">Appartements</a>
+      <a href="#biens" onclick="filterByType('local_commercial')">Locaux commerciaux</a>
+    </div>
+    <div class="footer-col">
+      <h4>Angy Company</h4>
+      <a href="#services">Services</a>
+      <a href="#apropos">À propos</a>
+      <a href="#deposer">Déposer un bien</a>
+      <a href="index.html">Boutique iPhones ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="fcopy">© 2026 Angy Company Immobilier. Tous droits réservés.</span>
+    <div class="footer-links"><a href="#accueil">Accueil</a><a href="#contact">Contact</a></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/221710538917" target="_blank" class="wa-float">💬</a>
+
+<!-- MODAL DETAIL BIEN -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeDetail()">✕</div>
+    <div class="modal-gallery" id="modalGallery">
+      <div class="modal-gallery-noimg">🏠</div>
+    </div>
+    <div class="modal-content">
+      <div class="modal-type" id="modalType"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-loc" id="modalLoc"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div id="modalMap"></div>
+      <div class="modal-actions">
+        <button class="modal-btn wa" id="modalWaBtn">💬 Contacter sur WhatsApp</button>
+        <button class="modal-btn rdv" onclick="openRdv()">📅 Demander une visite</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RDV -->
+<div class="modal-overlay" id="rdvModal">
+  <div class="rdv-box">
+    <div class="modal-close" onclick="closeRdv()">✕</div>
+    <h3 class="modal-title" style="font-size:1.5rem;margin-bottom:1rem;">Demander une visite</h3>
+    <div class="form-success" id="rdvSuccess">✅ Demande envoyée ! Nous vous contacterons rapidement.</div>
+    <div class="form-error" id="rdvError">❌ Erreur, merci de réessayer.</div>
+    <form id="rdvForm" onsubmit="submitRdv(event)">
+      <div class="form-field"><label>Votre nom *</label><input type="text" id="rNom" required></div>
+      <div class="form-field"><label>Téléphone *</label><input type="text" id="rTelephone" required></div>
+      <div class="form-field"><label>Date souhaitée</label><input type="date" id="rDate"></div>
+      <div class="form-field"><label>Message</label><textarea id="rMessage" placeholder="Précisions sur votre disponibilité..."></textarea></div>
+      <button type="submit" class="form-submit" style="width:100%;">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIG SUPABASE ===== */
+const SUPABASE_URL = "https://yedrtbaepdrmftjxvdpb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JTE3cosHWeOd-DwJwL2n-Q_wxV9SV0o";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const WA_NUMBER = "221710538917";
+
+const TYPE_LABELS = {
+  terrain:"Terrain", maison:"Maison", villa:"Villa", appartement:"Appartement",
+  immeuble:"Immeuble", local_commercial:"Local commercial", bureau:"Bureau"
+};
+
+let allBiens = [];
+let currentBien = null;
+let currentTransactionFilter = "";
+let currentTypeFilter = "";
+let visibleCount = 9;
+
+function fmtPrix(prix, transaction){
+  const n = Number(prix).toLocaleString('fr-FR').replace(/,/g,' ');
+  return n + " FCFA" + (transaction === "location" ? " / mois" : "");
+}
+
+/* ===== CHARGEMENT DES BIENS ===== */
+async function loadBiens(){
+  try{
+    const { data, error } = await sb.from('biens').select('*').eq('statut','publie').order('created_at',{ascending:false});
+    if(error){
+      document.getElementById('biensGrid').innerHTML = '<div class="empty-state">Impossible de charger les biens pour le moment. Réessayez dans un instant.</div>';
+      console.error('Erreur Supabase (loadBiens):', error);
+      return;
+    }
+    allBiens = data || [];
+    document.getElementById('statBiens').textContent = allBiens.length;
+    updateCategoryCounts();
+    renderBiens();
+  }catch(err){
+    document.getElementById('biensGrid').innerHTML = '<div class="empty-state">Connexion impossible pour le moment. Vérifiez votre connexion internet.</div>';
+    console.error('Exception (loadBiens):', err);
+  }
+}
+
+function updateCategoryCounts(){
+  const counts = {};
+  allBiens.forEach(b => { counts[b.type] = (counts[b.type]||0) + 1; });
+  document.querySelectorAll('[data-count-for]').forEach(el=>{
+    const t = el.getAttribute('data-count-for');
+    const c = counts[t] || 0;
+    el.textContent = c + (c > 1 ? " biens" : " bien");
+  });
+}
+
+function getFilteredBiens(){
+  return allBiens.filter(b=>{
+    if(currentTransactionFilter && b.transaction !== currentTransactionFilter) return false;
+    if(currentTypeFilter && b.type !== currentTypeFilter) return false;
+    const villeVal = document.getElementById('fVille').value.trim().toLowerCase();
+    if(villeVal && !(b.ville||'').toLowerCase().includes(villeVal)) return false;
+    const typeSelect = document.getElementById('fType').value;
+    if(typeSelect && b.type !== typeSelect) return false;
+    const budget = document.getElementById('fBudget').value;
+    if(budget && Number(b.prix) > Number(budget)) return false;
+    const chambres = document.getElementById('fChambres').value;
+    if(chambres && Number(b.chambres||0) < Number(chambres)) return false;
+    return true;
+  });
+}
+
+function renderBiens(){
+  const grid = document.getElementById('biensGrid');
+  const filtered = getFilteredBiens();
+  if(filtered.length === 0){
+    grid.innerHTML = '<div class="empty-state">Aucun bien ne correspond à votre recherche pour le moment. Contactez-nous sur WhatsApp, nous pouvons vous aider !</div>';
+    document.getElementById('loadMoreWrap').style.display = 'none';
+    return;
+  }
+  const toShow = filtered.slice(0, visibleCount);
+  grid.innerHTML = toShow.map(b => biensCardHtml(b)).join('');
+  document.getElementById('loadMoreWrap').style.display = filtered.length > visibleCount ? 'block' : 'none';
+  grid.querySelectorAll('.bcard').forEach(card=>{
+    card.addEventListener('click', ()=> openDetail(card.getAttribute('data-id')));
+  });
+}
+
+function biensCardHtml(b){
+  const photo = (b.photos && b.photos.length) ? b.photos[0] : null;
+  const specs = [];
+  if(b.chambres) specs.push(b.chambres + " ch.");
+  if(b.salles_bain) specs.push(b.salles_bain + " SdB");
+  if(b.superficie) specs.push(b.superficie + " m²");
+  return `
+  <div class="bcard" data-id="${b.id}">
+    <div class="bcard-img">
+      ${photo ? `<img src="${escAttr(photo)}" alt="${escAttr(b.titre)}" loading="lazy">` : `<div class="bcard-noimg">🏠</div>`}
+      <div class="bcard-badge">${b.transaction === 'vente' ? 'À vendre' : 'À louer'}</div>
+    </div>
+    <div class="bcard-body">
+      <div class="bcard-type">${TYPE_LABELS[b.type] || b.type}</div>
+      <div class="bcard-title">${escHtml(b.titre)}</div>
+      <div class="bcard-loc">📍 ${escHtml(b.ville)}${b.quartier ? ', ' + escHtml(b.quartier) : ''}</div>
+      <div class="bcard-specs">${specs.map(s=>`<span>${s}</span>`).join('')}</div>
+      <div class="bcard-price">${fmtPrix(b.prix, b.transaction)}</div>
+    </div>
+  </div>`;
+}
+
+function escHtml(s){ return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escAttr(s){ return escHtml(s); }
+
+function loadMore(){
+  visibleCount += 9;
+  renderBiens();
+}
+
+function applySearch(){
+  visibleCount = 9;
+  document.getElementById('biens').scrollIntoView({behavior:'smooth'});
+  renderBiens();
+}
+
+function filterByType(type){
+  currentTypeFilter = type;
+  document.getElementById('fType').value = type;
+  visibleCount = 9;
+  renderBiens();
+}
+
+/* Tabs transaction (search box) */
+document.querySelectorAll('.search-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.search-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    currentTransactionFilter = tab.getAttribute('data-transaction');
+    syncListingFilters();
+  });
+});
+document.querySelectorAll('.lf-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.lf-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTransactionFilter = btn.getAttribute('data-transaction');
+    syncSearchTabs();
+    visibleCount = 9;
+    renderBiens();
+  });
+});
+function syncListingFilters(){
+  document.querySelectorAll('.lf-btn').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-transaction') === currentTransactionFilter);
+  });
+}
+function syncSearchTabs(){
+  document.querySelectorAll('.search-tab').forEach(t=>{
+    t.classList.toggle('active', t.getAttribute('data-transaction') === currentTransactionFilter);
+  });
+}
+
+/* Category cards click */
+document.querySelectorAll('.cat-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    filterByType(card.getAttribute('data-type'));
+    document.getElementById('biens').scrollIntoView({behavior:'smooth'});
+  });
+});
+
+/* ===== MODAL DETAIL ===== */
+let modalMapInstance = null;
+let galleryIndex = 0;
+
+function openDetail(id){
+  const b = allBiens.find(x => String(x.id) === String(id));
+  if(!b) return;
+  currentBien = b;
+  galleryIndex = 0;
+
+  document.getElementById('modalType').textContent = TYPE_LABELS[b.type] || b.type;
+  document.getElementById('modalTitle').textContent = b.titre;
+  document.getElementById('modalLoc').textContent = "📍 " + b.ville + (b.quartier ? ", " + b.quartier : "");
+  document.getElementById('modalPrice').textContent = fmtPrix(b.prix, b.transaction);
+
+  const specs = [];
+  if(b.chambres) specs.push({n:b.chambres, l:'Chambres'});
+  if(b.salles_bain) specs.push({n:b.salles_bain, l:'Salles de bain'});
+  if(b.superficie) specs.push({n:b.superficie+' m²', l:'Superficie'});
+  document.getElementById('modalSpecs').innerHTML = specs.map(s=>`<div class="modal-spec"><div class="msn">${s.n}</div><div class="msl">${s.l}</div></div>`).join('');
+
+  document.getElementById('modalDesc').textContent = b.description || "Contactez-nous pour plus d'informations sur ce bien.";
+
+  renderGallery(b);
+
+  const waMsg = encodeURIComponent(`Bonjour, je suis intéressé(e) par ce bien : "${b.titre}" (${b.ville}) - ${fmtPrix(b.prix,b.transaction)}.`);
+  document.getElementById('modalWaBtn').onclick = ()=> window.open(`https://wa.me/${WA_NUMBER}?text=${waMsg}`, '_blank');
+
+  const mapDiv = document.getElementById('modalMap');
+  if(b.latitude && b.longitude){
+    mapDiv.style.display = 'block';
+    setTimeout(()=>{
+      if(modalMapInstance){ modalMapInstance.remove(); modalMapInstance = null; }
+      modalMapInstance = L.map('modalMap').setView([b.latitude, b.longitude], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(modalMapInstance);
+      L.marker([b.latitude, b.longitude]).addTo(modalMapInstance);
+    }, 50);
+  } else {
+    mapDiv.style.display = 'none';
+  }
+
+  document.getElementById('detailModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderGallery(b){
+  const gal = document.getElementById('modalGallery');
+  const photos = b.photos && b.photos.length ? b.photos : null;
+  if(!photos){
+    gal.innerHTML = '<div class="modal-gallery-noimg">🏠</div>';
+    return;
+  }
+  gal.innerHTML = `
+    <img src="${escAttr(photos[galleryIndex])}" alt="">
+    ${photos.length > 1 ? `
+      <div class="modal-gallery-nav prev" onclick="galleryNav(-1)">‹</div>
+      <div class="modal-gallery-nav next" onclick="galleryNav(1)">›</div>
+      <div class="modal-gallery-dots">${photos.map((_,i)=>`<span class="${i===galleryIndex?'active':''}"></span>`).join('')}</div>
+    ` : ''}`;
+}
+function galleryNav(dir){
+  if(!currentBien || !currentBien.photos) return;
+  const len = currentBien.photos.length;
+  galleryIndex = (galleryIndex + dir + len) % len;
+  renderGallery(currentBien);
+}
+
+function closeDetail(){
+  document.getElementById('detailModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ===== RDV MODAL ===== */
+function openRdv(){
+  document.getElementById('rdvModal').classList.add('open');
+}
+function closeRdv(){
+  document.getElementById('rdvModal').classList.remove('open');
+  document.getElementById('rdvSuccess').style.display='none';
+  document.getElementById('rdvError').style.display='none';
+}
+async function submitRdv(e){
+  e.preventDefault();
+  const payload = {
+    bien_id: currentBien ? currentBien.id : null,
+    nom: document.getElementById('rNom').value,
+    telephone: document.getElementById('rTelephone').value,
+    date_souhaitee: document.getElementById('rDate').value || null,
+    message: document.getElementById('rMessage').value
+  };
+  const { error } = await sb.from('rendez_vous').insert([payload]);
+  const successEl = document.getElementById('rdvSuccess');
+  const errorEl = document.getElementById('rdvError');
+  if(error){
+    errorEl.style.display='block'; successEl.style.display='none';
+    console.error(error);
+  } else {
+    successEl.style.display='block'; errorEl.style.display='none';
+    document.getElementById('rdvForm').reset();
+    setTimeout(closeRdv, 2200);
+  }
+}
+
+/* ===== DEPOT BIEN (proprietaire) ===== */
+async function submitDeposit(e){
+  e.preventDefault();
+  const payload = {
+    type: document.getElementById('dType').value,
+    transaction: document.getElementById('dTransaction').value,
+    titre: document.getElementById('dTitre').value,
+    ville: document.getElementById('dVille').value,
+    quartier: document.getElementById('dQuartier').value || null,
+    prix: Number(document.getElementById('dPrix').value),
+    superficie: document.getElementById('dSuperficie').value ? Number(document.getElementById('dSuperficie').value) : null,
+    chambres: document.getElementById('dChambres').value ? Number(document.getElementById('dChambres').value) : null,
+    salles_bain: document.getElementById('dSallesBain').value ? Number(document.getElementById('dSallesBain').value) : null,
+    description: document.getElementById('dDescription').value || null,
+    contact_nom: document.getElementById('dNom').value,
+    contact_telephone: document.getElementById('dTelephone').value,
+    statut: 'en_attente',
+    source: 'proprietaire'
+  };
+  const { error } = await sb.from('biens').insert([payload]);
+  const successEl = document.getElementById('depositSuccess');
+  const errorEl = document.getElementById('depositError');
+  if(error){
+    errorEl.style.display='block'; successEl.style.display='none';
+    console.error(error);
+  } else {
+    successEl.style.display='block'; errorEl.style.display='none';
+    document.getElementById('depositForm').reset();
+  }
+}
+
+/* ===== NAV MOBILE ===== */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', ()=>{
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click', ()=>{ hamburger.classList.remove('open'); navLinks.classList.remove('open'); });
+});
+
+/* ===== CONTACT MAP ===== */
+window.addEventListener('load', ()=>{
+  try{
+    const cmap = L.map('mapContact').setView([14.7500, -17.4380], 14); // Parcelles Assainies, Dakar
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(cmap);
+    L.marker([14.7500, -17.4380]).addTo(cmap).bindPopup("Angy Company - Parcelles Assainies U18, Dakar");
+  }catch(err){
+    console.error('Erreur carte contact:', err);
+    const el = document.getElementById('mapContact');
+    if(el) el.innerHTML = '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#888;font-size:0.85rem;">Carte indisponible</div>';
+  }
+});
+
+/* Fermer modales en cliquant en dehors */
+document.getElementById('detailModal').addEventListener('click', e=>{ if(e.target.id==='detailModal') closeDetail(); });
+document.getElementById('rdvModal').addEventListener('click', e=>{ if(e.target.id==='rdvModal') closeRdv(); });
+
+loadBiens();
+</script>
+</body>
+</html>

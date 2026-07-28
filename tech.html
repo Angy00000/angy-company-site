@@ -30,13 +30,13 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(255,255,255,0.9
 .nav-links a:hover::after{width:100%;}
 .nav-cta{background:var(--red)!important;color:#1a1a1a!important;padding:8px 18px;border-radius:4px;}
 .nav-cta::after{display:none!important;}
-@media(max-width:768px){.nav-links{display:none;}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:95px;left:0;right:0;background:rgba(8,8,8,0.98);padding:1.5rem 5%;gap:1rem;border-bottom:2px solid var(--red);z-index:999;}}
+@media(max-width:1080px){.nav-links{display:none;}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:95px;left:0;right:0;background:rgba(8,8,8,0.98);padding:1.5rem 5%;gap:1rem;border-bottom:2px solid var(--red);z-index:999;max-height:calc(100vh - 95px);overflow-y:auto;}}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;}
 .hamburger span{width:26px;height:2px;background:#1a1a1a;transition:all 0.3s;display:block;}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-@media(max-width:768px){.hamburger{display:flex;}}
+@media(max-width:1080px){.hamburger{display:flex;}}
 
 /* HERO */
 #accueil{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:150px 5% 60px;}

@@ -2,6 +2,23 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1590996659354786');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1590996659354786&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Angy Tech | iPhones, Accessoires, Gaming & Ordinateurs - Dakar, Sénégal</title>
 <meta name="description" content="Angy Tech (pôle technologie d'Angy Company) : vente d'iPhones du XR au 17 Pro Max, accessoires, gaming, ordinateurs, réparation, occasion et troc à Dakar, Sénégal. Produits 100% authentiques et garantis.">
@@ -9,6 +26,20 @@
 <meta property="og:title" content="Angy Tech | iPhones, Accessoires, Gaming & Ordinateurs - Dakar">
 <meta property="og:description" content="Pôle technologie d'Angy Company : iPhones, accessoires, gaming, ordinateurs, réparation et troc à Dakar, Sénégal.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://angy-company-site.vercel.app/images/og-image-tech.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://angy-company-site.vercel.app/tech.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Angy Tech | iPhones, Accessoires, Gaming & Ordinateurs - Dakar">
+<meta name="twitter:description" content="Pôle technologie d'Angy Company : iPhones, accessoires, gaming, ordinateurs, réparation et troc à Dakar, Sénégal.">
+<meta name="twitter:image" content="https://angy-company-site.vercel.app/images/og-image-tech.jpg">
+<link rel="canonical" href="https://angy-company-site.vercel.app/tech.html">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--red:#ff3131;--red2:#cc1f1f;--blue:#004aad;--blue2:#003580;--black:#ffffff;--dark:#f5f5f5;--dark2:#ffffff;--white:#1a1a1a;}
@@ -495,6 +526,11 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 .search-panel{max-width:640px;margin:70px auto 0;padding:0 5%;}
 .search-input-wrap{position:relative;display:flex;align-items:center;gap:0.6rem;background:#fff;border-radius:14px;padding:0.9rem 1.2rem;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
 .search-input-wrap input{flex:1;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:1rem;background:transparent;color:#1a1a1a;min-width:0;}
+.search-price-row{display:flex;align-items:center;gap:0.6rem;background:#fff;border-radius:14px;padding:0.7rem 1.2rem;margin-top:0.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.5);font-size:0.82rem;color:#666;}
+.search-price-row label{white-space:nowrap;font-weight:600;color:#888;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;}
+.search-price-row input{width:100%;min-width:0;border:1px solid rgba(0,0,0,0.12);border-radius:8px;padding:7px 9px;font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;background:#f7f7f7;color:#1a1a1a;}
+.search-price-row input:focus{border-color:var(--red);}
+.search-price-clear{background:none;border:none;color:var(--red);font-size:0.72rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
 .search-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:#888;padding:2px 6px;flex-shrink:0;}
 .search-results{margin-top:0.8rem;max-height:65vh;overflow-y:auto;border-radius:14px;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
 .sr-item{display:flex;align-items:center;gap:0.9rem;padding:0.75rem 1.1rem;cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.06);transition:background 0.2s;}
@@ -513,6 +549,9 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
   .search-toggle{color:#fff !important;}
   .search-input-wrap,.search-results{background:#1a1a1a !important;}
   .search-input-wrap input{color:#fff !important;}
+  .search-price-row{background:#1a1a1a !important;}
+  .search-price-row input{background:#0f0f0f !important;border-color:rgba(255,255,255,0.12) !important;color:#fff !important;}
+  .search-price-row label{color:#999 !important;}
   .sr-item{border-color:rgba(255,255,255,0.06) !important;}
   .sr-item:hover{background:rgba(232,0,28,0.1) !important;}
   .sr-name{color:#fff !important;}
@@ -539,6 +578,681 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 #accueil .hero-logo-wrap .logo-dark{display:inline-block !important;}
 
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ElectronicsStore",
+  "name": "Angy Tech",
+  "description": "Pôle technologie d'Angy Company : vente d'iPhones, accessoires, gaming, ordinateurs, réparation à Dakar, Sénégal.",
+  "url": "https://angy-company-site.vercel.app/tech.html",
+  "telephone": "+221710538917",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dakar",
+    "addressCountry": "SN"
+  },
+  "areaServed": "Dakar",
+  "priceRange": "5000-880000 XOF"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone XR",
+        "image": "https://angy-company-site.vercel.app/images/iphone-xr-5.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 100000,
+          "highPrice": 130000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 11",
+        "image": "https://angy-company-site.vercel.app/images/iphone-11-6.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 125000,
+          "highPrice": 140000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 11 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-11-pro-7.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 160000,
+          "highPrice": 180000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 11 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-11-pro-max-8.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 175000,
+          "highPrice": 200000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 12",
+        "image": "https://angy-company-site.vercel.app/images/iphone-12-9.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 150000,
+          "highPrice": 190000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 12 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-12-pro-10.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 195000,
+          "highPrice": 205000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 12 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-12-pro-max-11.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 240000,
+          "highPrice": 260000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 13",
+        "image": "https://angy-company-site.vercel.app/images/iphone-13-12.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 200000,
+          "highPrice": 220000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 13 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-13-pro-13.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 250000,
+          "highPrice": 270000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 13 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-13-pro-max-14.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 300000,
+          "highPrice": 370000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 14",
+        "image": "https://angy-company-site.vercel.app/images/iphone-14-15.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 260000,
+          "highPrice": 270000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 14 Plus",
+        "image": "https://angy-company-site.vercel.app/images/iphone-14-plus-16.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 290000,
+          "highPrice": 310000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 14 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-14-pro-17.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 300000,
+          "highPrice": 320000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 14 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-14-pro-max-18.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 390000,
+          "highPrice": 410000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 15",
+        "image": "https://angy-company-site.vercel.app/images/iphone-15-19.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 290000,
+          "highPrice": 310000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 15 Plus",
+        "image": "https://angy-company-site.vercel.app/images/iphone-15-plus-20.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 350000,
+          "highPrice": 360000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 15 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-15-pro-21.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 370000,
+          "highPrice": 380000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 15 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-15-pro-max-22.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 440000,
+          "highPrice": 460000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 16",
+        "image": "https://angy-company-site.vercel.app/images/iphone-16-23.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 390000,
+          "highPrice": 410000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 16 Plus",
+        "image": "https://angy-company-site.vercel.app/images/iphone-16-plus-24.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 430000,
+          "highPrice": 450000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 16 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-16-pro-25.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 460000,
+          "highPrice": 500000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 16 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-16-pro-max-26.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 540000,
+          "highPrice": 610000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 17",
+        "image": "https://angy-company-site.vercel.app/images/iphone-17-27.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 520000,
+          "highPrice": 560000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 17 Air",
+        "image": "https://angy-company-site.vercel.app/images/iphone-17-air-28.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 580000,
+          "highPrice": 580000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 17 Pro",
+        "image": "https://angy-company-site.vercel.app/images/iphone-17-pro-29.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 670000,
+          "highPrice": 730000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "item": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "iPhone 17 Pro Max",
+        "image": "https://angy-company-site.vercel.app/images/iphone-17-pro-max-30.png",
+        "brand": {
+          "@type": "Brand",
+          "name": "Apple"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "XOF",
+          "lowPrice": 790000,
+          "highPrice": 880000,
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Angy Tech"
+          }
+        }
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <style>
@@ -1350,6 +2064,13 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
       <input type="text" id="search-input" placeholder="Rechercher un produit (iPhone 15, AirPods, PS5...)" autocomplete="off">
       <button class="search-close" id="search-close">✕</button>
     </div>
+    <div class="search-price-row">
+      <label>Budget</label>
+      <input type="number" id="search-price-min" placeholder="Min FCFA" min="0" step="1000">
+      <span>—</span>
+      <input type="number" id="search-price-max" placeholder="Max FCFA" min="0" step="1000">
+      <button class="search-price-clear" id="search-price-clear">Effacer</button>
+    </div>
     <div class="search-results" id="search-results" style="display:none;"></div>
   </div>
 </div>
@@ -1424,6 +2145,7 @@ for (var i = 0; i < abtns.length; i++) {
       if (prix) {
         addToCart(name, "Accessoire", prix);
       } else {
+        if (typeof fbq !== "undefined") { fbq('track', 'Contact', { content_name: name }); }
         var msg = "Bonjour Angy Company!%0A%0A" + encodeURIComponent(name);
         window.open("https://wa.me/" + WA + "?text=" + msg, "_blank");
       }
@@ -1435,6 +2157,7 @@ var ocards = document.querySelectorAll(".ocard");
 for (var i = 0; i < ocards.length; i++) {
   (function(card) {
     card.onclick = function() {
+      if (typeof fbq !== "undefined") { fbq('track', 'Contact', { content_name: card.querySelector(".ocard-name") ? card.querySelector(".ocard-name").textContent : "Ordinateur" }); }
       window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(card.getAttribute("data-ordi")), "_blank");
     };
   })(ocards[i]);
@@ -1449,6 +2172,7 @@ var occcards = document.querySelectorAll(".occ-card");
 for (var i = 0; i < occcards.length; i++) {
   (function(card) {
     card.onclick = function() {
+      if (typeof fbq !== "undefined") { fbq('track', 'Contact', { content_name: 'Occasion' }); }
       window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(card.getAttribute("data-occ")), "_blank");
     };
   })(occcards[i]);
@@ -1458,6 +2182,7 @@ var rcards = document.querySelectorAll(".rep-card");
 for (var i = 0; i < rcards.length; i++) {
   (function(card) {
     card.onclick = function() {
+      if (typeof fbq !== "undefined") { fbq('track', 'Contact', { content_name: card.querySelector(".rep-name") ? card.querySelector(".rep-name").textContent : "Réparation" }); }
       window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(card.getAttribute("data-rep")), "_blank");
     };
   })(rcards[i]);
@@ -1531,6 +2256,10 @@ function addToCart(nom, stockage, prix, imgSrc) {
   panier.push({ nom: nom, stockage: stockage, prix: prix, imgSrc: imgSrc });
   updateCartUI();
   showCartNotif(nom + " (" + stockage + ") ajouté au panier !");
+  if (typeof fbq !== "undefined") {
+    var val = parseInt(String(prix).replace(/\D/g, ""), 10) || 0;
+    fbq('track', 'AddToCart', { content_name: nom, currency: 'XOF', value: val });
+  }
 }
 
 function removeFromCart(idx) {
@@ -1629,6 +2358,9 @@ function envoyerCommande() {
   lignes += "\n🙏 Merci de confirmer la disponibilité et le délai !";
 
   var url = "https://wa.me/" + WA + "?text=" + encodeURIComponent(lignes);
+  if (typeof fbq !== "undefined") {
+    fbq('track', 'InitiateCheckout', { currency: 'XOF', value: total, num_items: panier.length });
+  }
   window.open(url, "_blank");
 }
 
@@ -1677,6 +2409,12 @@ function showCartNotif(msg) {
 
 // ====== RECHERCHE PRODUITS ======
 var searchIndex = [];
+function parsePriceValue(txt) {
+  if (!txt) return null;
+  var digits = txt.replace(/[^\d]/g, "");
+  return digits ? parseInt(digits, 10) : null;
+}
+
 function buildSearchIndex() {
   var idx = [];
   document.querySelectorAll("#iphones .icard").forEach(function(c) {
@@ -1684,10 +2422,12 @@ function buildSearchIndex() {
     var prixEl = c.querySelector(".pprix");
     var img = c.querySelector("img");
     var cat = c.closest(".ipcat");
+    var prixTxt = prixEl ? "dès " + prixEl.textContent.trim() : "";
     idx.push({
       name: nameEl ? nameEl.textContent.trim() : "",
       cat: "iPhone",
-      prix: prixEl ? "dès " + prixEl.textContent.trim() : "",
+      prix: prixTxt,
+      priceValue: parsePriceValue(prixEl ? prixEl.textContent : ""),
       img: img ? img.getAttribute("src") : "",
       el: c,
       tabSel: cat ? '.iptab[data-ipcat="' + cat.id.replace("ipcat-", "") + '"]' : null
@@ -1701,6 +2441,7 @@ function buildSearchIndex() {
       name: nameEl ? nameEl.textContent.trim() : "",
       cat: "Accessoire",
       prix: prixEl ? prixEl.textContent.trim() : "",
+      priceValue: parsePriceValue(prixEl ? prixEl.textContent : ""),
       img: img ? img.getAttribute("src") : "",
       el: c, tabSel: null
     });
@@ -1716,6 +2457,7 @@ function buildSearchIndex() {
       name: nameEl ? nameEl.textContent.trim() : "",
       cat: "Gaming",
       prix: prixTxt,
+      priceValue: parsePriceValue(prixTxt),
       img: img ? img.getAttribute("src") : "",
       el: c,
       tabSel: cat ? '.gtab[data-gcat="' + cat.id.replace("gcat-", "") + '"]' : null
@@ -1726,7 +2468,7 @@ function buildSearchIndex() {
     var img = c.querySelector("img");
     idx.push({
       name: nameEl ? nameEl.textContent.trim() : "",
-      cat: "Ordinateur", prix: "Sur devis",
+      cat: "Ordinateur", prix: "Sur devis", priceValue: null,
       img: img ? img.getAttribute("src") : "",
       el: c, tabSel: null
     });
@@ -1735,7 +2477,7 @@ function buildSearchIndex() {
     var nameEl = c.querySelector(".rep-name");
     idx.push({
       name: nameEl ? nameEl.textContent.trim() : "",
-      cat: "Réparation", prix: "Devis gratuit",
+      cat: "Réparation", prix: "Devis gratuit", priceValue: null,
       img: "", el: c, tabSel: null
     });
   });
@@ -1743,7 +2485,7 @@ function buildSearchIndex() {
     var nameEl = c.querySelector(".occ-garanties-title");
     idx.push({
       name: nameEl ? nameEl.textContent.trim() : "",
-      cat: "Occasion", prix: "",
+      cat: "Occasion", prix: "", priceValue: null,
       img: "", el: c, tabSel: null
     });
   });
@@ -1753,11 +2495,15 @@ function buildSearchIndex() {
 var searchOverlayEl = document.getElementById("search-overlay");
 var searchInputEl = document.getElementById("search-input");
 var searchResultsEl = document.getElementById("search-results");
+var priceMinEl = document.getElementById("search-price-min");
+var priceMaxEl = document.getElementById("search-price-max");
 
 function openSearch() {
   searchIndex = buildSearchIndex();
   searchOverlayEl.classList.add("open");
   searchInputEl.value = "";
+  priceMinEl.value = "";
+  priceMaxEl.value = "";
   searchResultsEl.style.display = "none";
   searchResultsEl.innerHTML = "";
   setTimeout(function() { searchInputEl.focus(); }, 60);
@@ -1782,16 +2528,27 @@ function goToProduct(item) {
   }, item.tabSel ? 200 : 60);
 }
 
-function renderSearchResults(query) {
-  query = query.trim().toLowerCase();
-  if (!query) { searchResultsEl.style.display = "none"; searchResultsEl.innerHTML = ""; return; }
+function renderSearchResults() {
+  var query = searchInputEl.value.trim().toLowerCase();
+  var min = parsePriceValue(priceMinEl.value);
+  var max = parsePriceValue(priceMaxEl.value);
+  if (!query && min === null && max === null) {
+    searchResultsEl.style.display = "none"; searchResultsEl.innerHTML = ""; return;
+  }
   var matches = searchIndex.filter(function(item) {
-    return item.name.toLowerCase().indexOf(query) !== -1;
-  }).slice(0, 20);
+    if (query && item.name.toLowerCase().indexOf(query) === -1) return false;
+    if ((min !== null || max !== null)) {
+      if (item.priceValue === null) return false;
+      if (min !== null && item.priceValue < min) return false;
+      if (max !== null && item.priceValue > max) return false;
+    }
+    return true;
+  }).slice(0, 30);
   searchResultsEl.style.display = "block";
   if (matches.length === 0) {
-    var waMsg = encodeURIComponent("Bonjour Angy Company! Je cherche: " + query);
-    searchResultsEl.innerHTML = '<div class="search-empty">Aucun produit trouvé pour «\u00A0' + query + '\u00A0».<br>Essayez un autre mot-clé, ou <a href="https://wa.me/' + WA + '?text=' + waMsg + '" target="_blank" style="color:var(--red);font-weight:700;">demandez-nous directement sur WhatsApp</a>.</div>';
+    var label = query || (min !== null || max !== null ? "ce budget" : "");
+    var waMsg = encodeURIComponent("Bonjour Angy Company! Je cherche: " + (query || ("budget " + (priceMinEl.value || "0") + " - " + (priceMaxEl.value || "?") + " FCFA")));
+    searchResultsEl.innerHTML = '<div class="search-empty">Aucun produit trouvé pour «\u00A0' + label + '\u00A0».<br>Essayez d\u2019élargir le budget ou un autre mot-clé, ou <a href="https://wa.me/' + WA + '?text=' + waMsg + '" target="_blank" style="color:var(--red);font-weight:700;">demandez-nous directement sur WhatsApp</a>.</div>';
     return;
   }
   searchResultsEl.innerHTML = matches.map(function(item, i) {
@@ -1804,7 +2561,12 @@ function renderSearchResults(query) {
     el.onclick = function() { goToProduct(matches[parseInt(el.getAttribute("data-idx"), 10)]); };
   });
 }
-searchInputEl.addEventListener("input", function() { renderSearchResults(this.value); });
+searchInputEl.addEventListener("input", renderSearchResults);
+priceMinEl.addEventListener("input", renderSearchResults);
+priceMaxEl.addEventListener("input", renderSearchResults);
+document.getElementById("search-price-clear").onclick = function() {
+  priceMinEl.value = ""; priceMaxEl.value = ""; renderSearchResults();
+};
 </script>
 </body>
 </html>

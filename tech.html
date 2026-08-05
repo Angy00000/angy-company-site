@@ -519,8 +519,10 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 @media (prefers-color-scheme: dark) { .logo-light{display:none !important;} .logo-dark{display:inline-block !important;} }
 
 /* SEARCH */
-.search-toggle{background:none;border:none;font-size:1.15rem;cursor:pointer;color:#1a1a1a;padding:8px 10px;margin-left:auto;border-radius:8px;transition:background 0.2s;line-height:1;}
-.search-toggle:hover{background:rgba(232,0,28,0.08);}
+.search-toggle{background:linear-gradient(135deg,var(--red),var(--blue));border:none;color:#fff;font-size:0.78rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;padding:10px 16px;margin-left:auto;margin-right:10px;border-radius:30px;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(232,0,28,0.35);transition:all 0.3s;white-space:nowrap;animation:searchAttn 1.8s ease-in-out 2;}
+.search-toggle:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,0,28,0.5);}
+.search-toggle-label{display:inline;}
+@keyframes searchAttn{0%,100%{box-shadow:0 4px 14px rgba(232,0,28,0.35);}50%{box-shadow:0 4px 22px rgba(232,0,28,0.65),0 0 0 7px rgba(232,0,28,0.14);}}
 .search-overlay{display:none;position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);}
 .search-overlay.open{display:block;}
 .search-panel{max-width:640px;margin:70px auto 0;padding:0 5%;}
@@ -544,7 +546,7 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 .search-empty{padding:2rem 1.1rem;text-align:center;color:#888;font-size:0.88rem;line-height:1.6;}
 .search-highlight{animation:searchPulse 1.7s ease;}
 @keyframes searchPulse{0%,100%{box-shadow:0 2px 15px rgba(0,0,0,0.06);}25%{box-shadow:0 0 0 4px var(--red),0 20px 50px rgba(232,0,28,0.35);}}
-@media(max-width:640px){.search-panel{margin-top:90px;}.search-toggle{padding:8px;}}
+@media(max-width:640px){.search-panel{margin-top:90px;}.search-toggle{padding:10px;border-radius:50%;margin-right:6px;}.search-toggle-label{display:none;}}
 @media (prefers-color-scheme: dark){
   .search-toggle{color:#fff !important;}
   .search-input-wrap,.search-results{background:#1a1a1a !important;}
@@ -1269,7 +1271,7 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 <nav>
   <div class="nav-inner">
     <a href="#accueil" class="nav-logo"><img class="logo-light" src="images/angy-tech-1.png" alt="Angy Tech" loading="lazy"><img class="logo-dark" src="images/angy-tech-2.png" alt="Angy Tech" loading="lazy"></a>
-    <button class="search-toggle" id="search-toggle" aria-label="Rechercher un produit">🔍</button>
+    <button class="search-toggle" id="search-toggle" aria-label="Rechercher un produit">🔍<span class="search-toggle-label">Rechercher</span></button>
     <ul class="nav-links">
       <li><a href="#iphones">iPhones</a></li>
       <li><a href="#accessoires">Accèssoires</a></li>

@@ -487,6 +487,39 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 .logo-dark{display:none;}
 @media (prefers-color-scheme: dark) { .logo-light{display:none !important;} .logo-dark{display:inline-block !important;} }
 
+/* SEARCH */
+.search-toggle{background:none;border:none;font-size:1.15rem;cursor:pointer;color:#1a1a1a;padding:8px 10px;margin-left:auto;border-radius:8px;transition:background 0.2s;line-height:1;}
+.search-toggle:hover{background:rgba(232,0,28,0.08);}
+.search-overlay{display:none;position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);}
+.search-overlay.open{display:block;}
+.search-panel{max-width:640px;margin:70px auto 0;padding:0 5%;}
+.search-input-wrap{position:relative;display:flex;align-items:center;gap:0.6rem;background:#fff;border-radius:14px;padding:0.9rem 1.2rem;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.search-input-wrap input{flex:1;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:1rem;background:transparent;color:#1a1a1a;min-width:0;}
+.search-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:#888;padding:2px 6px;flex-shrink:0;}
+.search-results{margin-top:0.8rem;max-height:65vh;overflow-y:auto;border-radius:14px;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.sr-item{display:flex;align-items:center;gap:0.9rem;padding:0.75rem 1.1rem;cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.06);transition:background 0.2s;}
+.sr-item:last-child{border-bottom:none;}
+.sr-item:hover{background:#fff5f5;}
+.sr-img{width:44px;height:44px;border-radius:9px;object-fit:contain;background:#f5f5f5;flex-shrink:0;}
+.sr-info{flex:1;min-width:0;}
+.sr-name{font-weight:700;font-size:0.88rem;color:#1a1a1a;}
+.sr-cat{font-size:0.68rem;color:#999;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.sr-prix{font-size:0.82rem;font-weight:700;color:var(--red);white-space:nowrap;flex-shrink:0;}
+.search-empty{padding:2rem 1.1rem;text-align:center;color:#888;font-size:0.88rem;line-height:1.6;}
+.search-highlight{animation:searchPulse 1.7s ease;}
+@keyframes searchPulse{0%,100%{box-shadow:0 2px 15px rgba(0,0,0,0.06);}25%{box-shadow:0 0 0 4px var(--red),0 20px 50px rgba(232,0,28,0.35);}}
+@media(max-width:640px){.search-panel{margin-top:90px;}.search-toggle{padding:8px;}}
+@media (prefers-color-scheme: dark){
+  .search-toggle{color:#fff !important;}
+  .search-input-wrap,.search-results{background:#1a1a1a !important;}
+  .search-input-wrap input{color:#fff !important;}
+  .sr-item{border-color:rgba(255,255,255,0.06) !important;}
+  .sr-item:hover{background:rgba(232,0,28,0.1) !important;}
+  .sr-name{color:#fff !important;}
+  .sr-img{background:#0a0a0a !important;}
+  .search-empty{color:#888 !important;}
+}
+
 .occ-garanties-title{color:#1a1a1a;}
 .occ-garanties-item{color:#444;}
 
@@ -522,6 +555,7 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 <nav>
   <div class="nav-inner">
     <a href="#accueil" class="nav-logo"><img class="logo-light" src="images/angy-tech-1.png" alt="Angy Tech" loading="lazy"><img class="logo-dark" src="images/angy-tech-2.png" alt="Angy Tech" loading="lazy"></a>
+    <button class="search-toggle" id="search-toggle" aria-label="Rechercher un produit">🔍</button>
     <ul class="nav-links">
       <li><a href="#iphones">iPhones</a></li>
       <li><a href="#accessoires">Accèssoires</a></li>
@@ -1308,6 +1342,18 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
   </div>
 </div>
 
+<!-- RECHERCHE -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-panel">
+    <div class="search-input-wrap">
+      <span>🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher un produit (iPhone 15, AirPods, PS5...)" autocomplete="off">
+      <button class="search-close" id="search-close">✕</button>
+    </div>
+    <div class="search-results" id="search-results" style="display:none;"></div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
     <button class="modal-close" id="modal-close">x</button>
@@ -1628,6 +1674,137 @@ function showCartNotif(msg) {
 
   startAuto();
 })();
+
+// ====== RECHERCHE PRODUITS ======
+var searchIndex = [];
+function buildSearchIndex() {
+  var idx = [];
+  document.querySelectorAll("#iphones .icard").forEach(function(c) {
+    var nameEl = c.querySelector(".iname");
+    var prixEl = c.querySelector(".pprix");
+    var img = c.querySelector("img");
+    var cat = c.closest(".ipcat");
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "iPhone",
+      prix: prixEl ? "dès " + prixEl.textContent.trim() : "",
+      img: img ? img.getAttribute("src") : "",
+      el: c,
+      tabSel: cat ? '.iptab[data-ipcat="' + cat.id.replace("ipcat-", "") + '"]' : null
+    });
+  });
+  document.querySelectorAll("#accessoires .acard").forEach(function(c) {
+    var nameEl = c.querySelector(".acard-name");
+    var prixEl = c.querySelector(".acard-prix");
+    var img = c.querySelector("img");
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "Accessoire",
+      prix: prixEl ? prixEl.textContent.trim() : "",
+      img: img ? img.getAttribute("src") : "",
+      el: c, tabSel: null
+    });
+  });
+  document.querySelectorAll("#gaming .gcard").forEach(function(c) {
+    var nameEl = c.querySelector(".gcard-name");
+    var prixEl = c.querySelector(".gcard-prix");
+    var img = c.querySelector("img");
+    var cat = c.closest(".gcat");
+    var prixTxt = "";
+    if (prixEl && prixEl.childNodes.length) { prixTxt = prixEl.childNodes[0].nodeValue.trim(); }
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "Gaming",
+      prix: prixTxt,
+      img: img ? img.getAttribute("src") : "",
+      el: c,
+      tabSel: cat ? '.gtab[data-gcat="' + cat.id.replace("gcat-", "") + '"]' : null
+    });
+  });
+  document.querySelectorAll("#ordinateurs .ocard").forEach(function(c) {
+    var nameEl = c.querySelector(".ocard-name");
+    var img = c.querySelector("img");
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "Ordinateur", prix: "Sur devis",
+      img: img ? img.getAttribute("src") : "",
+      el: c, tabSel: null
+    });
+  });
+  document.querySelectorAll("#reparation .rep-card").forEach(function(c) {
+    var nameEl = c.querySelector(".rep-name");
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "Réparation", prix: "Devis gratuit",
+      img: "", el: c, tabSel: null
+    });
+  });
+  document.querySelectorAll("#occasion .occ-card").forEach(function(c) {
+    var nameEl = c.querySelector(".occ-garanties-title");
+    idx.push({
+      name: nameEl ? nameEl.textContent.trim() : "",
+      cat: "Occasion", prix: "",
+      img: "", el: c, tabSel: null
+    });
+  });
+  return idx;
+}
+
+var searchOverlayEl = document.getElementById("search-overlay");
+var searchInputEl = document.getElementById("search-input");
+var searchResultsEl = document.getElementById("search-results");
+
+function openSearch() {
+  searchIndex = buildSearchIndex();
+  searchOverlayEl.classList.add("open");
+  searchInputEl.value = "";
+  searchResultsEl.style.display = "none";
+  searchResultsEl.innerHTML = "";
+  setTimeout(function() { searchInputEl.focus(); }, 60);
+}
+function closeSearch() { searchOverlayEl.classList.remove("open"); }
+
+document.getElementById("search-toggle").onclick = openSearch;
+document.getElementById("search-close").onclick = closeSearch;
+searchOverlayEl.onclick = function(e) { if (e.target === this) closeSearch(); };
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeSearch(); });
+
+function goToProduct(item) {
+  closeSearch();
+  if (item.tabSel) {
+    var tab = document.querySelector(item.tabSel);
+    if (tab) tab.click();
+  }
+  setTimeout(function() {
+    item.el.scrollIntoView({ behavior: "smooth", block: "center" });
+    item.el.classList.add("search-highlight");
+    setTimeout(function() { item.el.classList.remove("search-highlight"); }, 1700);
+  }, item.tabSel ? 200 : 60);
+}
+
+function renderSearchResults(query) {
+  query = query.trim().toLowerCase();
+  if (!query) { searchResultsEl.style.display = "none"; searchResultsEl.innerHTML = ""; return; }
+  var matches = searchIndex.filter(function(item) {
+    return item.name.toLowerCase().indexOf(query) !== -1;
+  }).slice(0, 20);
+  searchResultsEl.style.display = "block";
+  if (matches.length === 0) {
+    var waMsg = encodeURIComponent("Bonjour Angy Company! Je cherche: " + query);
+    searchResultsEl.innerHTML = '<div class="search-empty">Aucun produit trouvé pour «\u00A0' + query + '\u00A0».<br>Essayez un autre mot-clé, ou <a href="https://wa.me/' + WA + '?text=' + waMsg + '" target="_blank" style="color:var(--red);font-weight:700;">demandez-nous directement sur WhatsApp</a>.</div>';
+    return;
+  }
+  searchResultsEl.innerHTML = matches.map(function(item, i) {
+    var imgHtml = item.img ? '<img class="sr-img" src="' + item.img + '" loading="lazy" alt="">' : '<div class="sr-img"></div>';
+    return '<div class="sr-item" data-idx="' + i + '">' + imgHtml +
+      '<div class="sr-info"><div class="sr-name">' + item.name + '</div><div class="sr-cat">' + item.cat + '</div></div>' +
+      '<div class="sr-prix">' + item.prix + '</div></div>';
+  }).join("");
+  searchResultsEl.querySelectorAll(".sr-item").forEach(function(el) {
+    el.onclick = function() { goToProduct(matches[parseInt(el.getAttribute("data-idx"), 10)]); };
+  });
+}
+searchInputEl.addEventListener("input", function() { renderSearchResults(this.value); });
 </script>
 </body>
 </html>

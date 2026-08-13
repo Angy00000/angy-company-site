@@ -2012,6 +2012,12 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
           <label>Adresse précise</label>
           <textarea id="f-cart-adresse" placeholder="Rue, repère, numéro de maison..."></textarea>
         </div>
+        <div>
+          <button type="button" id="btn-geoloc" onclick="partagerPosition()" style="width:100%;padding:0.7rem;border-radius:10px;border:2px solid var(--red);background:#fff;color:var(--red);font-weight:700;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+            📍 Partager ma position GPS
+          </button>
+          <div id="geoloc-status" style="font-size:0.78rem;margin-top:0.4rem;color:#666;"></div>
+        </div>
 
         <!-- MODE DE PAIEMENT -->
         <div class="form-section-title" style="margin-top:0.8rem;">💳 Mode de paiement</div>
@@ -2331,6 +2337,41 @@ document.getElementById("cart-modal").onclick = function(e) {
   if (e.target === this) closeCart();
 };
 
+var positionGPS = null;
+
+function partagerPosition() {
+  var statusEl = document.getElementById("geoloc-status");
+  var btnEl = document.getElementById("btn-geoloc");
+  if (!navigator.geolocation) {
+    statusEl.textContent = "⚠️ La géolocalisation n'est pas supportée par votre navigateur.";
+    statusEl.style.color = "#c00";
+    return;
+  }
+  statusEl.textContent = "📡 Localisation en cours...";
+  statusEl.style.color = "#666";
+  btnEl.disabled = true;
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      positionGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      statusEl.textContent = "✅ Position partagée avec succès !";
+      statusEl.style.color = "#1a8917";
+      btnEl.textContent = "📍 Position enregistrée";
+      btnEl.style.background = "#e8f5e9";
+      btnEl.disabled = false;
+    },
+    function(err) {
+      btnEl.disabled = false;
+      if (err.code === err.PERMISSION_DENIED) {
+        statusEl.textContent = "⚠️ Accès à la position refusé. Vous pouvez l'autoriser dans les réglages du navigateur.";
+      } else {
+        statusEl.textContent = "⚠️ Impossible d'obtenir votre position. Réessayez ou indiquez votre adresse manuellement.";
+      }
+      statusEl.style.color = "#c00";
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
 function envoyerCommande() {
   if (panier.length === 0) { alert("Votre panier est vide !"); return; }
   var nom = document.getElementById("f-cart-nom").value.trim();
@@ -2361,6 +2402,9 @@ function envoyerCommande() {
   lignes += "📞 " + tel + "\n";
   lignes += "📍 " + quartier + "\n";
   if (adresse) { lignes += "🏠 " + adresse + "\n"; }
+  if (positionGPS) {
+    lignes += "🗺️ Position GPS : https://maps.google.com/?q=" + positionGPS.lat + "," + positionGPS.lng + "\n";
+  }
   lignes += "\n━━ PAIEMENT ━━\n";
   lignes += payLabel + "\n";
   if (paySelected === "wave" || paySelected === "om") {

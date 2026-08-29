@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/contact.html", "destination": "/angy", "permanent": true },
-    { "source": "/contact", "destination": "/angy", "permanent": true }
+    { "source": "/contact", "destination": "/angy", "permanent": true },
+    { "source": "/contact.html", "destination": "/angy", "permanent": true }
   ]
 }

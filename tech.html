@@ -1300,18 +1300,58 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
 
 <!-- HERO -->
 <section id="accueil">
-  <div class="hero-slides" id="hero-slides">
-    
-    <div class="hero-slide active" style="background-image:url(images/hero-slide-1.jpg)"></div>
-    <div class="hero-slide" style="background-image:url(images/hero-slide-2.jpg)"></div>
-    <div class="hero-slide" style="background-image:url(images/hero-slide-3.jpg)"></div>
+<style>
+#accueil{--av-nav:61px;--av-cx:50%;min-height:calc(100vh - var(--av-nav));min-height:calc(100svh - var(--av-nav));background:#04060B;padding-bottom:96px;isolation:isolate}
+#accueil .av-stage{position:absolute;inset:0;z-index:0;overflow:hidden}
+#accueil .av-scene{position:absolute;inset:0;overflow:hidden;visibility:hidden}
+#accueil .av-scene.on,#accueil .av-scene.in{visibility:visible}
+#accueil .av-blur{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(44px) brightness(.4) saturate(1.35);transform:scale(1.1)}
+#accueil .av-pic{position:absolute;left:var(--av-cx);top:50%;height:100%;transform:translate(-50%,-50%)}
+#accueil .av-pic img{display:block;height:100%;width:auto;max-width:none;transform-origin:50% 50%}
+#accueil .av-scene.kb .av-pic img{animation:avKB 7s linear forwards}
+@keyframes avKB{from{transform:scale(1.02) rotate(-1deg)}to{transform:scale(1.14) rotate(1deg) translateY(-2%)}}
+#accueil .av-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(4,6,11,.9) 0%,rgba(4,6,11,0) 22%),rgba(4,6,11,.6)}
+#accueil .av-ring{position:absolute;left:var(--av-cx);top:50%;border-radius:50%;border:2px solid #ff3131;box-shadow:0 0 28px rgba(255,49,49,.9),inset 0 0 28px rgba(0,74,173,.9);pointer-events:none;opacity:0;z-index:50;transform:translate(-50%,-50%)}
+#accueil .hero-content{z-index:2}
+#accueil .av-cap{position:absolute;right:120px;bottom:54px;z-index:3;text-align:right;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;pointer-events:none}
+#accueil .av-cap.show{opacity:1;transform:none;transition:opacity .8s .3s,transform .8s .3s}
+#accueil .av-cap span{display:block;font:700 .78rem 'Outfit',sans-serif;letter-spacing:2px;text-transform:uppercase;color:#ff3131}
+#accueil .av-cap strong{display:block;font:400 clamp(1.6rem,2.6vw,2.4rem) 'Bebas Neue',sans-serif;letter-spacing:2px;color:#fff;margin-top:2px}
+#accueil .av-dots{position:absolute;bottom:26px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:4}
+#accueil .av-dots button{width:30px;height:4px;border:0;padding:0;border-radius:2px;background:rgba(255,255,255,.28);cursor:pointer;overflow:hidden;position:relative}
+#accueil .av-dots button::before{content:"";position:absolute;inset:-10px 0}
+#accueil .av-dots button span{position:absolute;inset:0;background:linear-gradient(90deg,#ff3131,#004aad);transform-origin:0 50%;transform:scaleX(0)}
+#accueil .av-dots button.done span{transform:scaleX(1)}
+#accueil .av-dots button.cur span{animation:avFill 5s linear forwards}
+#accueil.av-paused .av-dots button.cur span{animation-play-state:paused}
+@keyframes avFill{to{transform:scaleX(1)}}
+#accueil .av-dots button:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@media (min-aspect-ratio:1/1) and (min-width:900px){
+  #accueil{--av-cx:70%;align-items:flex-start;text-align:left;padding-left:6%;padding-right:6%}
+  #accueil .av-shade{background:linear-gradient(90deg,rgba(4,6,11,.94) 0%,rgba(4,6,11,.82) 28%,rgba(4,6,11,.25) 56%,rgba(4,6,11,.05) 100%),linear-gradient(0deg,rgba(4,6,11,.85) 0%,rgba(4,6,11,0) 24%)}
+  #accueil .hero-content{align-items:flex-start;max-width:520px}
+  #accueil .hero-sub,#accueil .hero-trust{margin-left:0;text-align:left}
+  #accueil .hero-btns,#accueil .hero-stats{justify-content:flex-start}
+  #accueil .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;width:100%}
+  #accueil .stat-box{padding:.8rem .5rem}
+}
+@media (max-aspect-ratio:1/1),(max-width:899px){
+  #accueil .av-shade{background:linear-gradient(0deg,rgba(4,6,11,.9) 0%,rgba(4,6,11,0) 18%),rgba(4,6,11,.5)}
+  #accueil .av-cap{display:none}
+}
+@media (prefers-reduced-motion:reduce){#accueil .av-scene.kb .av-pic img{animation:none}}
+</style>
+  <div class="av-stage" id="av-stage">
+    <div class="av-scene" data-k="La collection" data-n="iPhone, iPad, Apple Watch"><div class="av-blur" style="background-image:url(images/vitrine-1.webp)"></div><div class="av-pic"><img src="images/vitrine-1.webp" alt="Collection Angy Tech" decoding="async" fetchpriority="high"></div></div>
+    <div class="av-scene" data-k="Finitions" data-n="Titane et contours dorés"><div class="av-blur" style="background-image:url(images/vitrine-2.webp)"></div><div class="av-pic"><img src="images/vitrine-2.webp" alt="Titane et contours dorés" decoding="async"></div></div>
+    <div class="av-scene" data-k="Appareil photo" data-n="Trois objectifs"><div class="av-blur" style="background-image:url(images/vitrine-3.webp)"></div><div class="av-pic"><img src="images/vitrine-3.webp" alt="Trois objectifs" decoding="async"></div></div>
+    <div class="av-scene" data-k="Couleurs" data-n="Noir, naturel, bleu, bordeaux"><div class="av-blur" style="background-image:url(images/vitrine-4.webp)"></div><div class="av-pic"><img src="images/vitrine-4.webp" alt="Noir, naturel, bleu, bordeaux" decoding="async"></div></div>
+    <div class="av-scene" data-k="iPhone" data-n="Toute la gamme"><div class="av-blur" style="background-image:url(images/vitrine-5.webp)"></div><div class="av-pic"><img src="images/vitrine-5.webp" alt="Toute la gamme" decoding="async"></div></div>
+    <div class="av-scene" data-k="iPad" data-n="Travaille, crée, joue"><div class="av-blur" style="background-image:url(images/vitrine-6.webp)"></div><div class="av-pic"><img src="images/vitrine-6.webp" alt="Travaille, crée, joue" decoding="async"></div></div>
+    <div class="av-scene" data-k="Apple Watch" data-n="Au poignet, toute la journée"><div class="av-blur" style="background-image:url(images/vitrine-7.webp)"></div><div class="av-pic"><img src="images/vitrine-7.webp" alt="Au poignet, toute la journée" decoding="async"></div></div>
+    <div class="av-ring" id="av-ring"></div>
   </div>
-  <div class="hero-bg"></div>
-  <div class="hero-slide-dots" id="hero-slide-dots">
-    <button class="hero-slide-dot active" data-slide="0" aria-label="Slide 1"></button>
-    <button class="hero-slide-dot" data-slide="1" aria-label="Slide 2"></button>
-    <button class="hero-slide-dot" data-slide="2" aria-label="Slide 3"></button>
-  </div>
+  <div class="av-shade"></div>
   <div class="hero-content fadein">
     <div class="hero-badge" style="display:inline-flex;align-items:center;gap:8px;">🇸🇳 Sénégal · Livraison à Dakar - Depuis 2026</div>
     <div class="hero-logo-wrap">
@@ -1338,7 +1378,47 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
       <div class="stat-box"><div class="stat-num">23+</div><div class="stat-lbl">Modèles iPhone</div></div>
     </div>
   </div>
-</div>
+  <div class="av-cap" id="av-cap" aria-hidden="true"><span></span><strong></strong></div>
+  <div class="av-dots" id="av-dots"></div>
+<script>
+(function(){
+  var root=document.getElementById('accueil'), stage=document.getElementById('av-stage');
+  if(!root||!stage)return;
+  var scenes=[].slice.call(stage.querySelectorAll('.av-scene')), ring=document.getElementById('av-ring'), dotsBox=document.getElementById('av-dots'), cap=document.getElementById('av-cap');
+  var N=scenes.length, DUR=5000, TR=1300, cur=0, busy=false, timer=null, visible=true, z=1;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches, navEl=document.querySelector('nav');
+  function setNav(){root.style.setProperty('--av-nav',(navEl&&getComputedStyle(navEl).position!=='static'?navEl.offsetHeight:0)+'px');}
+  var dots=scenes.map(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Image '+(i+1));b.innerHTML='<span></span>';b.onclick=function(){go(i);};dotsBox.appendChild(b);return b;});
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  function kb(s){s.classList.remove('kb');void s.offsetWidth;s.classList.add('kb');}
+  function caption(i){cap.classList.remove('show');setTimeout(function(){cap.querySelector('span').textContent=scenes[i].dataset.k;cap.querySelector('strong').textContent=scenes[i].dataset.n;cap.classList.add('show');},250);}
+  function paintDots(){dots.forEach(function(d,i){d.classList.toggle('done',i<cur);d.classList.remove('cur');if(i===cur){void d.offsetWidth;d.classList.add('cur');}});}
+  function schedule(){clearTimeout(timer);if(visible&&!document.hidden)timer=setTimeout(function(){go((cur+1)%N);},DUR);}
+  function go(n){
+    if(busy||n===cur)return; busy=true; clearTimeout(timer);
+    var from=scenes[cur], to=scenes[n];
+    from.classList.remove('on'); from.classList.add('in'); to.style.zIndex=++z; to.classList.add('in'); kb(to); caption(n);
+    var w=stage.offsetWidth,h=stage.offsetHeight,cx=getComputedStyle(root).getPropertyValue('--av-cx').trim()||'50%';
+    var rmax=Math.hypot(Math.max(parseFloat(cx),100-parseFloat(cx))/100*w,h/2)*1.05,t0=null;
+    if(reduce){done();return;}
+    function step(ts){
+      if(t0===null)t0=ts; var t=Math.min((ts-t0)/TR,1), r=ease(t);
+      to.style.clipPath=to.style.webkitClipPath='circle('+(r*rmax)+'px at '+cx+' 50%)';
+      ring.style.width=ring.style.height=(r*rmax*2)+'px'; ring.style.opacity=Math.sin(t*Math.PI);
+      if(t<1)requestAnimationFrame(step); else done();
+    }
+    function done(){ring.style.opacity=0;to.style.clipPath=to.style.webkitClipPath='none';from.classList.remove('in','kb');from.style.clipPath='';to.classList.remove('in');to.classList.add('on');cur=n;busy=false;paintDots();schedule();}
+    requestAnimationFrame(step);
+  }
+  var sx=null;
+  root.addEventListener('pointerdown',function(e){if(e.target.closest('a,button'))return;sx=e.clientX;});
+  root.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>50)go((cur+(dx<0?1:N-1))%N);});
+  if('IntersectionObserver' in window){new IntersectionObserver(function(en){visible=en[0].isIntersecting;root.classList.toggle('av-paused',!visible);if(visible)schedule();else clearTimeout(timer);},{threshold:.3}).observe(root);}
+  document.addEventListener('visibilitychange',function(){if(document.hidden){clearTimeout(timer);root.classList.add('av-paused');}else{root.classList.remove('av-paused');schedule();}});
+  window.addEventListener('resize',setNav);
+  setNav(); scenes[0].classList.add('on'); scenes[0].style.zIndex=1; kb(scenes[0]); caption(0); paintDots(); schedule();
+})();
+</script>
 </section>
 
 <!-- TRUST BAR -->
@@ -1349,114 +1429,6 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
   <div class="trust-item"><span class="trust-icon">🔒</span><span>Satisfait ou rembourse</span></div>
   <div class="trust-item"><span class="trust-icon">💬</span><span>Support 7j/7</span></div>
 </div>
-
-<!-- VITRINE DEFILANTE -->
-<section id="vitrine" aria-label="Vitrine Angy Tech" aria-roledescription="carrousel">
-<style>
-#vitrine{position:relative;background:#04060B;color:#F2F5FA;--av-nav:61px}
-#vitrine .av-stage{position:relative;height:calc(92vh - var(--av-nav));height:calc(92svh - var(--av-nav));min-height:480px;max-height:900px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-#vitrine .av-scene{position:absolute;inset:0;overflow:hidden;visibility:hidden}
-#vitrine .av-scene.on,#vitrine .av-scene.in{visibility:visible}
-#vitrine .av-blur{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(40px) brightness(.42) saturate(1.3);transform:scale(1.1)}
-#vitrine .av-scene img{position:absolute;left:50%;top:50%;height:100%;width:auto;max-width:none;transform:translate(-50%,-50%) scale(1.02)}
-#vitrine .av-scene.kb img{animation:avKB 7s linear forwards}
-@keyframes avKB{from{transform:translate(-50%,-50%) scale(1.02) rotate(-1deg)}to{transform:translate(-50%,-52%) scale(1.15) rotate(1deg)}}
-#vitrine .av-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,11,.85) 0%,rgba(4,6,11,.35) 38%,transparent 60%)}
-#vitrine .av-copy{position:absolute;left:clamp(22px,6vw,90px);top:50%;max-width:min(430px,40vw);opacity:0;transform:translateY(calc(-50% + 24px));transition:opacity .5s,transform .5s}
-#vitrine .av-scene.on .av-copy{opacity:1;transform:translateY(-50%);transition:opacity .8s .35s,transform .8s .35s}
-#vitrine .av-k{margin:0 0 10px;font:700 .9rem 'Outfit',sans-serif;color:#ff3131}
-#vitrine .av-copy h2{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;line-height:.95;font-size:clamp(3rem,7vw,5.6rem);margin:0;color:#fff}
-#vitrine .av-copy p.av-t{margin:12px 0 0;color:#B7C0D2;font-size:1.05rem;line-height:1.55;max-width:34ch}
-#vitrine .av-ring{position:absolute;left:50%;top:50%;border-radius:50%;border:2px solid #ff3131;box-shadow:0 0 26px rgba(255,49,49,.9),inset 0 0 26px rgba(0,74,173,.9);pointer-events:none;opacity:0;z-index:50;transform:translate(-50%,-50%)}
-#vitrine .av-dots{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:60}
-#vitrine .av-dots button{width:28px;height:4px;border:0;padding:0;border-radius:2px;background:rgba(255,255,255,.28);cursor:pointer;overflow:hidden;position:relative}
-#vitrine .av-dots button::before{content:"";position:absolute;inset:-10px 0}
-#vitrine .av-dots button span{position:absolute;inset:0;background:linear-gradient(90deg,#ff3131,#004aad);transform-origin:0 50%;transform:scaleX(0)}
-#vitrine .av-dots button.done span{transform:scaleX(1)}
-#vitrine .av-dots button.cur span{animation:avFill var(--av-dur,5s) linear forwards}
-#vitrine.paused .av-dots button.cur span{animation-play-state:paused}
-@keyframes avFill{to{transform:scaleX(1)}}
-#vitrine .av-dots button:focus-visible{outline:2px solid #fff;outline-offset:4px}
-#vitrine .av-end{position:relative;text-align:center;padding:56px 24px 64px;background:radial-gradient(60% 60% at 50% 50%,rgba(255,49,49,.14),rgba(0,74,173,.10) 45%,transparent 75%),#04060B}
-#vitrine .av-end h2{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;font-size:clamp(2.6rem,6vw,4.4rem);color:#fff;margin:0}
-#vitrine .av-end p{color:#B7C0D2;margin:10px auto 0;max-width:40ch;line-height:1.6}
-#vitrine .av-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-#vitrine .av-btns a{text-decoration:none;font:700 1rem 'Outfit',sans-serif;padding:14px 22px;border-radius:12px}
-#vitrine .av-wa{background:#25D366;color:#fff}
-#vitrine .av-see{border:1.5px solid rgba(255,255,255,.5);color:#fff}
-#vitrine .av-btns a:focus-visible{outline:3px solid #ff3131;outline-offset:3px}
-@media (max-aspect-ratio:1/1){
-  #vitrine .av-scene img{height:auto;width:100%;top:42%}
-  #vitrine .av-scene.kb img{animation-name:avKBm}
-  #vitrine .av-scrim{background:linear-gradient(0deg,rgba(4,6,11,.95) 0%,rgba(4,6,11,.6) 30%,transparent 55%)}
-  #vitrine .av-copy{top:auto;bottom:52px;left:22px;right:92px;max-width:none;transform:translateY(24px)}
-  #vitrine .av-scene.on .av-copy{transform:none}
-  #vitrine .av-copy h2{font-size:clamp(2.6rem,11vw,3.6rem)}
-  #vitrine .av-copy p.av-t{font-size:.95rem}
-}
-@keyframes avKBm{from{transform:translate(-50%,-42%) scale(1.02) rotate(-1deg)}to{transform:translate(-50%,-46%) scale(1.15) rotate(1deg)}}
-@media (prefers-reduced-motion:reduce){#vitrine .av-scene.kb img{animation:none}}
-</style>
-<div class="av-stage" id="av-stage">
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-1.webp)"></div><img src="images/vitrine-1.webp" alt="Angy Tech" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">La collection</p><h2>Angy Tech</h2><p class="av-t">iPhone, iPad et Apple Watch 100% originaux, livrés à Dakar.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-2.webp)"></div><img src="images/vitrine-2.webp" alt="Des détails qui brillent" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Finitions</p><h2>Des détails qui brillent</h2><p class="av-t">Titane, verre mat, contours dorés.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-3.webp)"></div><img src="images/vitrine-3.webp" alt="Trois objectifs. Zéro compromis" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Appareil photo</p><h2>Trois objectifs. Zéro compromis</h2><p class="av-t">Des photos nettes, de jour comme de nuit.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-4.webp)"></div><img src="images/vitrine-4.webp" alt="Choisis la tienne" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Couleurs</p><h2>Choisis la tienne</h2><p class="av-t">Noir, naturel, bleu ou bordeaux. On te la livre.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-5.webp)"></div><img src="images/vitrine-5.webp" alt="Léger en main" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">iPhone</p><h2>Léger en main</h2><p class="av-t">Toute la gamme, de l'iPhone XR au 17 Pro Max.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-6.webp)"></div><img src="images/vitrine-6.webp" alt="Travaille. Crée. Joue." decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">iPad</p><h2>Travaille. Crée. Joue.</h2><p class="av-t">Un iPad pour chaque usage et chaque couleur.</p></div></div>
-  <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-7.webp)"></div><img src="images/vitrine-7.webp" alt="Au poignet, toute la journée" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Apple Watch</p><h2>Au poignet, toute la journée</h2><p class="av-t">Sport, santé et style, avec le bracelet de ton choix.</p></div></div>
-  <div class="av-ring" id="av-ring"></div>
-  <div class="av-dots" id="av-dots"></div>
-</div>
-<div class="av-end">
-  <h2>Le tien t'attend</h2>
-  <p>Dis-nous le modèle et la couleur, on te répond tout de suite et on te livre à Dakar.</p>
-  <div class="av-btns">
-    <a class="av-wa" href="https://wa.me/221710538917?text=Bonjour%20Angy%20Tech%20!%20Je%20souhaite%20commander%20un%20produit." target="_blank" rel="noopener">Commander sur WhatsApp</a>
-    <a class="av-see" href="#iphones">Voir les iPhone</a>
-  </div>
-</div>
-<script>
-(function(){
-  var root=document.getElementById('vitrine'), stage=document.getElementById('av-stage');
-  var scenes=[].slice.call(stage.querySelectorAll('.av-scene')), ring=document.getElementById('av-ring'), dotsBox=document.getElementById('av-dots');
-  var N=scenes.length, DUR=5000, TR=1300, cur=0, busy=false, timer=null, visible=true, z=1;
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var navEl=document.querySelector('nav');
-  function setNav(){ root.style.setProperty('--av-nav',(navEl&&getComputedStyle(navEl).position!=='static'?navEl.offsetHeight:0)+'px'); }
-  root.style.setProperty('--av-dur',DUR+'ms');
-  var dots=scenes.map(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Image '+(i+1));b.innerHTML='<span></span>';b.onclick=function(){go(i);};dotsBox.appendChild(b);return b;});
-  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
-  function kb(s){s.classList.remove('kb');void s.offsetWidth;s.classList.add('kb');}
-  function paintDots(){dots.forEach(function(d,i){d.classList.toggle('done',i<cur);d.classList.remove('cur');if(i===cur){void d.offsetWidth;d.classList.add('cur');}});}
-  function schedule(){clearTimeout(timer);if(visible&&!document.hidden)timer=setTimeout(function(){go((cur+1)%N);},DUR);}
-  function go(n){
-    if(busy||n===cur)return; busy=true; clearTimeout(timer);
-    var from=scenes[cur], to=scenes[n];
-    from.classList.remove('on'); from.classList.add('in'); to.style.zIndex=++z; to.classList.add('in'); kb(to);
-    var w=stage.offsetWidth,h=stage.offsetHeight,diag=Math.hypot(w,h),t0=null;
-    if(reduce){to.style.clipPath='none';done();return;}
-    function step(ts){
-      if(t0===null)t0=ts; var t=Math.min((ts-t0)/TR,1), r=ease(t);
-      to.style.clipPath=to.style.webkitClipPath='circle('+(r*diag*.6)+'px at 50% 50%)';
-      var d=r*diag*1.2; ring.style.width=ring.style.height=d+'px'; ring.style.opacity=Math.sin(t*Math.PI);
-      if(t<1)requestAnimationFrame(step); else done();
-    }
-    function done(){ring.style.opacity=0;to.style.clipPath=to.style.webkitClipPath='none';from.classList.remove('in','kb');from.style.clipPath='';to.classList.remove('in');to.classList.add('on');cur=n;busy=false;paintDots();schedule();}
-    requestAnimationFrame(step);
-  }
-  // swipe
-  var sx=null;
-  stage.addEventListener('pointerdown',function(e){sx=e.clientX;});
-  stage.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40)go((cur+(dx<0?1:N-1))%N);});
-  // pause hors écran
-  if('IntersectionObserver' in window){new IntersectionObserver(function(en){visible=en[0].isIntersecting;root.classList.toggle('paused',!visible);if(visible)schedule();else clearTimeout(timer);},{threshold:.35}).observe(stage);}
-  document.addEventListener('visibilitychange',function(){if(document.hidden){clearTimeout(timer);root.classList.add('paused');}else{root.classList.remove('paused');schedule();}});
-  window.addEventListener('resize',setNav);
-  setNav(); scenes[0].classList.add('on'); scenes[0].style.zIndex=1; kb(scenes[0]); paintDots(); schedule();
-})();
-</script>
-</section>
 
 <!-- IPHONES -->
 <section id="iphones">

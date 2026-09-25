@@ -1350,6 +1350,108 @@ footer{background:#fff;border-top:2px solid var(--red);box-shadow:0 -2px 15px rg
   <div class="trust-item"><span class="trust-icon">💬</span><span>Support 7j/7</span></div>
 </div>
 
+<!-- VITRINE DEFILANTE -->
+<section id="vitrine" aria-label="Vitrine Angy Tech">
+<style>
+#vitrine{position:relative;background:#04060B;color:#F2F5FA;--av-nav:61px}
+#vitrine .av-stage{position:sticky;top:var(--av-nav);height:calc(100vh - var(--av-nav));height:calc(100svh - var(--av-nav));overflow:hidden}
+#vitrine .av-scene{position:absolute;inset:0;overflow:hidden}
+#vitrine .av-blur{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(40px) brightness(.42) saturate(1.3);transform:scale(1.1)}
+#vitrine .av-scene img{position:absolute;left:50%;top:50%;height:100%;width:auto;max-width:none;transform:translate(-50%,-50%);will-change:transform}
+#vitrine .av-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,11,.85) 0%,rgba(4,6,11,.35) 38%,transparent 60%)}
+#vitrine .av-copy{position:absolute;left:clamp(22px,6vw,90px);top:50%;max-width:min(430px,40vw);will-change:transform,opacity}
+#vitrine .av-k{margin:0 0 10px;font:700 .9rem 'Outfit',sans-serif;color:#ff3131}
+#vitrine .av-copy h2{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;line-height:.95;font-size:clamp(3rem,7vw,5.6rem);margin:0;color:#fff}
+#vitrine .av-copy p.av-t{margin:12px 0 0;color:#B7C0D2;font-size:1.05rem;line-height:1.55;max-width:34ch}
+#vitrine .av-ring{position:absolute;left:50%;top:50%;border-radius:50%;border:2px solid #ff3131;box-shadow:0 0 26px rgba(255,49,49,.9),inset 0 0 26px rgba(0,74,173,.9);pointer-events:none;opacity:0;z-index:10;transform:translate(-50%,-50%)}
+#vitrine .av-bar{position:absolute;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#ff3131,#004aad);z-index:12}
+#vitrine .av-hint{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#B7C0D2;font-size:.9rem;z-index:12;animation:avBob 1.6s ease-in-out infinite;transition:opacity .3s}
+@keyframes avBob{50%{transform:translateY(6px)}}
+#vitrine .av-end{position:relative;text-align:center;padding:70px 24px 80px;background:radial-gradient(60% 60% at 50% 50%,rgba(255,49,49,.14),rgba(0,74,173,.10) 45%,transparent 75%),#04060B}
+#vitrine .av-end h2{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:2px;font-size:clamp(2.6rem,6vw,4.4rem);color:#fff;margin:0}
+#vitrine .av-end p{color:#B7C0D2;margin:10px auto 0;max-width:40ch;line-height:1.6}
+#vitrine .av-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+#vitrine .av-btns a{text-decoration:none;font:700 1rem 'Outfit',sans-serif;padding:14px 22px;border-radius:12px}
+#vitrine .av-wa{background:#25D366;color:#fff}
+#vitrine .av-see{border:1.5px solid rgba(255,255,255,.5);color:#fff}
+#vitrine .av-btns a:focus-visible{outline:3px solid #ff3131;outline-offset:3px}
+@media (max-aspect-ratio:1/1){
+  #vitrine .av-scene img{height:auto;width:100%;top:44%}
+  #vitrine .av-scrim{background:linear-gradient(0deg,rgba(4,6,11,.95) 0%,rgba(4,6,11,.6) 30%,transparent 55%)}
+  #vitrine .av-copy{top:auto;bottom:56px;left:22px;right:92px;max-width:none}
+  #vitrine .av-copy h2{font-size:clamp(2.6rem,11vw,3.6rem)}
+  #vitrine .av-copy p.av-t{font-size:.95rem}
+}
+@media (prefers-reduced-motion:reduce){#vitrine .av-hint{animation:none}}
+</style>
+<div class="av-story" id="av-story">
+  <div class="av-stage">
+    <div class="av-bar" id="av-bar"></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-1.webp)"></div><img src="images/vitrine-1.webp" alt="Angy Tech" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">La collection</p><h2>Angy Tech</h2><p class="av-t">iPhone, iPad et Apple Watch 100% originaux, livrés à Dakar.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-2.webp)"></div><img src="images/vitrine-2.webp" alt="Des détails qui brillent" decoding="async"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Finitions</p><h2>Des détails qui brillent</h2><p class="av-t">Titane, verre mat, contours dorés.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-3.webp)"></div><img src="images/vitrine-3.webp" alt="Trois objectifs. Zéro compromis" decoding="async" loading="lazy"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Appareil photo</p><h2>Trois objectifs. Zéro compromis</h2><p class="av-t">Des photos nettes, de jour comme de nuit.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-4.webp)"></div><img src="images/vitrine-4.webp" alt="Choisis la tienne" decoding="async" loading="lazy"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Couleurs</p><h2>Choisis la tienne</h2><p class="av-t">Noir, naturel, bleu ou bordeaux. On te la livre.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-5.webp)"></div><img src="images/vitrine-5.webp" alt="Léger en main" decoding="async" loading="lazy"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">iPhone</p><h2>Léger en main</h2><p class="av-t">Toute la gamme, de l'iPhone XR au 17 Pro Max.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-6.webp)"></div><img src="images/vitrine-6.webp" alt="Travaille. Crée. Joue." decoding="async" loading="lazy"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">iPad</p><h2>Travaille. Crée. Joue.</h2><p class="av-t">Un iPad pour chaque usage et chaque couleur.</p></div></div>
+    <div class="av-scene"><div class="av-blur" style="background-image:url(images/vitrine-7.webp)"></div><img src="images/vitrine-7.webp" alt="Au poignet, toute la journée" decoding="async" loading="lazy"><div class="av-scrim"></div><div class="av-copy"><p class="av-k">Apple Watch</p><h2>Au poignet, toute la journée</h2><p class="av-t">Sport, santé et style, avec le bracelet de ton choix.</p></div></div>
+    <div class="av-ring" id="av-ring"></div>
+    <div class="av-hint" id="av-hint">Fais défiler</div>
+  </div>
+</div>
+<div class="av-end">
+  <h2>Le tien t'attend</h2>
+  <p>Dis-nous le modèle et la couleur, on te répond tout de suite et on te livre à Dakar.</p>
+  <div class="av-btns">
+    <a class="av-wa" href="https://wa.me/221710538917?text=Bonjour%20Angy%20Tech%20!%20Je%20souhaite%20commander%20un%20produit." target="_blank" rel="noopener">Commander sur WhatsApp</a>
+    <a class="av-see" href="#iphones">Voir les iPhone</a>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('vitrine'), story=document.getElementById('av-story');
+  var scenes=[].slice.call(root.querySelectorAll('.av-scene'));
+  var ring=document.getElementById('av-ring'), bar=document.getElementById('av-bar'), hint=document.getElementById('av-hint');
+  var N=scenes.length, reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var navEl=document.querySelector('nav');
+  function clamp(v,a,b){return Math.min(Math.max(v,a),b);}
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  function size(){
+    var nh=navEl?navEl.offsetHeight:0; root.style.setProperty('--av-nav',nh+'px');
+    story.style.height=(N*115+40)+'vh';
+  }
+  function frame(){
+    var stage=story.firstElementChild, vh=stage.offsetHeight, vw=stage.offsetWidth;
+    var total=story.offsetHeight-vh; if(total<=0)return;
+    var nh=navEl?navEl.offsetHeight:0;
+    var p=clamp((nh-story.getBoundingClientRect().top)/total,0,1);
+    bar.style.transform='scaleX('+p+')';
+    hint.style.opacity=p<.02?1:0;
+    var pos=p*(N-1), diag=Math.hypot(vw,vh), ringOn=false, land=vw/vh>1;
+    scenes.forEach(function(s,i){
+      var img=s.querySelector('img'), copy=s.querySelector('.av-copy');
+      if(i>0){
+        var t=clamp((pos-(i-1)-.45)/.55,0,1), r=ease(t);
+        s.style.clipPath='circle('+(r*diag*.6)+'px at 50% 50%)';
+        s.style.webkitClipPath=s.style.clipPath;
+        s.style.visibility=t>0?'visible':'hidden';
+        if(t>0&&t<1){ringOn=true;var d=r*diag*1.2;ring.style.width=ring.style.height=d+'px';ring.style.opacity=Math.sin(t*Math.PI);}
+      }
+      var local=clamp(pos-i+1,0,2)/2;
+      if(!reduce) img.style.transform='translate(-50%,-50%) scale('+(1.02+local*.14)+') translateY('+((local-.5)*-3)+'%) rotate('+((local-.5)*2)+'deg)';
+      var dd=pos-i;
+      copy.style.opacity=clamp(1-Math.abs(dd)*2.4,0,1);
+      copy.style.transform='translateY(calc('+(land?'-50%':'0%')+' + '+(dd*-60)+'px))';
+    });
+    if(!ringOn) ring.style.opacity=0;
+  }
+  var tick=false;
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){frame();tick=false;});}},{passive:true});
+  window.addEventListener('resize',function(){size();frame();});
+  size(); frame();
+})();
+</script>
+</section>
+
 <!-- IPHONES -->
 <section id="iphones">
   <div class="reveal">

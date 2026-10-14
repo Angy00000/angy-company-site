@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url><loc>https://angy-company-site.vercel.app/</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angy-company-site.vercel.app/images/og-angy-company.jpg</image:loc></image:image></url>
-  <url><loc>https://angy-company-site.vercel.app/tech</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angy-company-site.vercel.app/images/og-angy-tech.jpg</image:loc></image:image></url>
-  <url><loc>https://angy-company-site.vercel.app/immobilier</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angy-company-site.vercel.app/images/og-angy-immo.jpg</image:loc></image:image></url>
-  <url><loc>https://angy-company-site.vercel.app/automobile</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angy-company-site.vercel.app/images/og-angy-auto.jpg</image:loc></image:image></url>
+  <url><loc>https://angycompany.com/</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angycompany.com/images/og-angy-company.jpg</image:loc></image:image></url>
+  <url><loc>https://angycompany.com/tech</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angycompany.com/images/og-angy-tech.jpg</image:loc></image:image></url>
+  <url><loc>https://angycompany.com/immobilier</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angycompany.com/images/og-angy-immo.jpg</image:loc></image:image></url>
+  <url><loc>https://angycompany.com/automobile</loc><lastmod>2026-10-14</lastmod><image:image><image:loc>https://angycompany.com/images/og-angy-auto.jpg</image:loc></image:image></url>
 </urlset>

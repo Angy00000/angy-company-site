@@ -270,7 +270,7 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 @keyframes defile{to{transform:translateX(-50%);}}
 
 /* Pôles en suspens : Immobilier et Automobile, projets à venir */
-.pole-avenir{cursor:default!important;}
+.pole-avenir{cursor:default!important;opacity:.6;filter:saturate(.75) brightness(.9);pointer-events:none;}
 .pole-avenir:hover{transform:none!important;}
 .pole-avenir::after{display:none;}
 .pole-statut{display:inline-block;width:fit-content;margin:0 0 1rem;padding:4px 12px;border-radius:999px;border:1px solid var(--pole-accent);color:var(--pole-accent);background:rgba(255,255,255,0.04);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
@@ -278,7 +278,7 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 .pole-immo .pole-btn-avenir{background:linear-gradient(120deg,#c084fc,#7c3aed)!important;color:#fff!important;box-shadow:0 10px 26px -8px rgba(124,58,237,0.75);}
 .pole-auto .pole-btn-avenir{background:linear-gradient(120deg,#ff6b7d,#e11d2e)!important;color:#fff!important;box-shadow:0 10px 26px -8px rgba(225,29,46,0.75);}
 .pole-btn-avenir:hover{transform:none;box-shadow:none;}
-.chip-avenir{cursor:default;}
+.chip-avenir{cursor:default;opacity:.6;filter:saturate(.75) brightness(.9);pointer-events:none;}
 .chip-avenir:hover{transform:none!important;background:var(--verre)!important;border-color:var(--verre-bord)!important;box-shadow:none!important;}
 .chip-avenir::after{display:none;}
 .hero-pole-chip.chip-auto img{width:100%;max-width:150px;height:58px;object-fit:contain;}

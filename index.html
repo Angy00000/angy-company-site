@@ -263,10 +263,23 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 
 /* Bandeau simple : une ligne discrète, les pôles qui défilent lentement */
 .bandeau{overflow:hidden;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
-.bandeau-piste{display:flex;align-items:center;gap:64px;width:max-content;padding-right:64px;animation:defile 45s linear infinite;}
+.bandeau-piste{display:flex;align-items:center;gap:28px;width:max-content;padding-right:28px;animation:defile 50s linear infinite;}
+.bandeau-piste b{width:5px;height:5px;border-radius:50%;background:var(--or);opacity:.8;flex:none;}
 .bandeau-piste span{display:inline-flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;color:rgba(255,255,255,0.75);white-space:nowrap;}
 .bandeau-piste img{width:26px;height:26px;object-fit:contain;}
 @keyframes defile{to{transform:translateX(-50%);}}
+
+/* Pôles en suspens : Immobilier et Automobile, projets à venir */
+.pole-avenir{cursor:default!important;opacity:.62;filter:saturate(.55);}
+.pole-avenir:hover{transform:none!important;}
+.pole-avenir::after{display:none;}
+.pole-statut{display:inline-block;width:fit-content;margin:0 0 1rem;padding:4px 12px;border-radius:999px;border:1px dashed rgba(255,255,255,0.4);color:rgba(255,255,255,0.85);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
+.pole-btn-avenir{background:transparent!important;border:1px dashed rgba(255,255,255,0.3);color:rgba(255,255,255,0.6)!important;cursor:default;}
+.pole-btn-avenir:hover{transform:none;box-shadow:none;}
+.chip-avenir{opacity:.55;cursor:default;}
+.chip-avenir:hover{transform:none!important;background:var(--verre)!important;border-color:var(--verre-bord)!important;box-shadow:none!important;}
+.chip-avenir::after{display:none;}
+.chip-statut{display:block;font-size:.6rem;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;}
 
 /* Sections */
 section{padding:96px 5%;}
@@ -433,8 +446,8 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
     </div>
     <div class="hero-poles">
       <div class="hero-pole-chip" style="cursor:pointer;" onclick="window.location.href='tech.html'"><img src="images/icon-tech-192.png" alt="Angy Tech">Angy Tech</div>
-      <div class="hero-pole-chip" style="cursor:pointer;" onclick="window.location.href='immobilier.html'"><img src="images/icon-immo-192.png" alt="Angy Immo">Angy Immobilier<span style="display:block;font-size:0.6rem;font-weight:700;color:#ffcf6b;">Bientôt disponible</span></div>
-      <div class="hero-pole-chip" style="cursor:pointer;" onclick="window.location.href='automobile.html'"><img src="images/icon-auto-192.png" alt="Angy Automobile">Angy Automobile<span style="display:block;font-size:0.6rem;font-weight:700;color:#ffcf6b;">Bientôt disponible</span></div>
+      <div class="hero-pole-chip chip-avenir"><img src="images/icon-immo-192.png" alt="Angy Immo">Angy Immobilier<span class="chip-statut">Projet à venir</span></div>
+      <div class="hero-pole-chip chip-avenir"><img src="images/icon-auto-192.png" alt="Angy Automobile">Angy Automobile<span class="chip-statut">Projet à venir</span></div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Pôles d'activité</div></div>
@@ -444,7 +457,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
   </div>
 </section>
 
-<div class="bandeau" aria-hidden="true"><div class="bandeau-piste"><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span></div></div>
+<div class="bandeau" aria-hidden="true"><div class="bandeau-piste"><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><b></b><span>iPhone</span><b></b><span>Samsung</span><b></b><span>MacBook</span><b></b><span>iPad</span><b></b><span>AirPods</span><b></b><span>Apple Watch</span><b></b><span>Consoles</span><b></b><span>Accessoires</span><b></b><span>Réparation</span><b></b><span><img src="images/icon-os-48.png" alt="">AngyOS</span><b></b><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><b></b><span>iPhone</span><b></b><span>Samsung</span><b></b><span>MacBook</span><b></b><span>iPad</span><b></b><span>AirPods</span><b></b><span>Apple Watch</span><b></b><span>Consoles</span><b></b><span>Accessoires</span><b></b><span>Réparation</span><b></b><span><img src="images/icon-os-48.png" alt="">AngyOS</span><b></b><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><b></b><span>iPhone</span><b></b><span>Samsung</span><b></b><span>MacBook</span><b></b><span>iPad</span><b></b><span>AirPods</span><b></b><span>Apple Watch</span><b></b><span>Consoles</span><b></b><span>Accessoires</span><b></b><span>Réparation</span><b></b><span><img src="images/icon-os-48.png" alt="">AngyOS</span><b></b><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><b></b><span>iPhone</span><b></b><span>Samsung</span><b></b><span>MacBook</span><b></b><span>iPad</span><b></b><span>AirPods</span><b></b><span>Apple Watch</span><b></b><span>Consoles</span><b></b><span>Accessoires</span><b></b><span>Réparation</span><b></b><span><img src="images/icon-os-48.png" alt="">AngyOS</span><b></b></div></div>
 
 <!-- A PROPOS -->
 <section id="apropos" class="fond-trame">
@@ -508,12 +521,10 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
       <a href="tech.html" class="pole-btn">Découvrir Angy Tech →</a>
     </div>
 
-    <div class="pole-card pole-immo fadein" onclick="if(event.target.tagName!=='A'){window.location.href='immobilier.html';}" style="cursor:pointer;">
+    <div class="pole-card pole-immo pole-avenir fadein">
       <div class="pole-index">02</div>
-      <div class="pole-eyebrow">Immobilier</div>
+      <div class="pole-eyebrow">Immobilier</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-immo-carte.png" alt="Angy Immo">
-      <div class="pole-name"><span style="display:block;font-size:0.62rem;font-weight:700;opacity:0.85;">🕐 Bientôt dispo</span></div>
-      <div class="pole-eyebrow" style="background:rgba(255,255,255,0.9);color:#001433;margin-left:8px;">🕐 Bientôt disponible</div>
       <div class="pole-tagline">Achat, vente, location et gestion de biens : nous simplifions vos transactions immobilières.</div>
       <ul class="pole-list">
         <li>Vente & achat de terrains, maisons</li>
@@ -521,15 +532,13 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
         <li>Gestion locative & estimation</li>
         <li>Conseil en investissement</li>
       </ul>
-      <a href="immobilier.html" class="pole-btn">Découvrir Angy Immobilier →</a>
+      <span class="pole-btn pole-btn-avenir">Bientôt</span>
     </div>
 
-    <div class="pole-card pole-auto fadein" onclick="if(event.target.tagName!=='A'){window.location.href='automobile.html';}" style="cursor:pointer;">
+    <div class="pole-card pole-auto pole-avenir fadein">
       <div class="pole-index">03</div>
-      <div class="pole-eyebrow">Automobile</div>
+      <div class="pole-eyebrow">Automobile</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-auto-carte.png" alt="Angy Automobile">
-      <div class="pole-name"><span style="display:block;font-size:0.62rem;font-weight:700;opacity:0.85;">🕐 Bientôt dispo</span></div>
-      <div class="pole-eyebrow" style="background:rgba(255,255,255,0.9);color:#001433;margin-left:8px;">🕐 Bientôt disponible</div>
       <div class="pole-tagline">Vente, achat, importation et location de véhicules, ainsi que des services d'entretien et de diagnostic.</div>
       <ul class="pole-list">
         <li>Vente, achat & importation de véhicules</li>
@@ -537,7 +546,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
         <li>Pièces détachées & diagnostic</li>
         <li>Garages partenaires</li>
       </ul>
-      <a href="automobile.html" class="pole-btn">Découvrir Angy Automobile →</a>
+      <span class="pole-btn pole-btn-avenir">Bientôt</span>
     </div>
 
   </div>

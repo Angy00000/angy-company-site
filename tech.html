@@ -1419,7 +1419,8 @@ body .av-band{background:linear-gradient(180deg,rgba(0,0,0,.75),rgba(10,10,14,.8
       <img class="logo-light hero-logo-img" src="images/angy-tech-3.png" alt="Angy Tech" style="max-width:340px;width:80%;height:auto;" loading="lazy">
       <img class="logo-dark hero-logo-img" src="images/angy-tech-4.png" alt="Angy Tech" style="max-width:340px;width:80%;height:auto;" loading="lazy">
     </div>
-    <p class="hero-sub">📱 Tous les iPhones disponibles du iPhone XR au iPhone 17 Pro Max.</p>
+    <h1 class="hero-titre-tech">iPhones authentiques,<br><span>livrés à Dakar.</span></h1>
+    <p class="hero-sub">Du iPhone XR au 17 Pro Max, plus les accessoires, le gaming et les ordinateurs. Paiement Wave, Orange Money ou à la livraison.</p>
     <div class="hero-btns">
       <a href="#iphones" class="btn-red">Voir les iPhones</a>
       <a href="#contact" class="btn-out">Nous contacter</a>
@@ -2891,6 +2892,40 @@ footer{background:rgba(5,8,16,0.96)!important;border-top:1px solid rgba(255,255,
 .drapeau i:nth-child(2){background:#fdef42;}
 .drapeau i:nth-child(3){background:#e31b23;}
 .drapeau b{color:#00853f;font-size:8px;line-height:1;font-style:normal;}
+/* ===== HERO TECH : texte et vitrine séparés (plus de chevauchement) ===== */
+body #accueil{min-height:calc(100svh - var(--av-nav,70px))!important;justify-content:center!important;align-items:flex-start!important;padding:90px 6% 150px!important;text-align:left;}
+body #accueil .av-shade{background:linear-gradient(90deg,rgba(7,10,20,0.92) 0%,rgba(7,10,20,0.75) 34%,rgba(7,10,20,0) 58%),linear-gradient(0deg,rgba(7,10,20,0.9) 0%,rgba(7,10,20,0) 22%)!important;}
+body #accueil .hero-content{max-width:540px!important;align-items:flex-start!important;text-align:left!important;margin:0!important;}
+body #accueil .hero-badge{left:6%!important;transform:none!important;top:30px!important;font-size:.66rem!important;}
+body #accueil .hero-logo-wrap{margin:0 0 1.1rem!important;}
+body #accueil .hero-logo-glow{inset:-20px -30px!important;background:radial-gradient(ellipse at center,rgba(47,127,255,0.35),transparent 70%)!important;}
+body #accueil .hero-logo-img{max-width:150px!important;width:150px!important;}
+.hero-titre-tech{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(2.2rem,4.4vw,3.6rem);line-height:1.05;letter-spacing:-1.5px;color:#fff;margin:0 0 1rem;}
+.hero-titre-tech span{background:var(--grad-texte);-webkit-background-clip:text;background-clip:text;color:transparent;}
+body #accueil .hero-sub{text-align:left!important;max-width:470px!important;margin:0 0 1.6rem!important;font-size:1.02rem!important;line-height:1.65;color:rgba(255,255,255,0.78)!important;text-shadow:none!important;}
+body #accueil .hero-btns{justify-content:flex-start!important;}
+/* Vitrine produits à droite */
+body #av-bg .av-pic{left:71%!important;top:52%!important;width:min(50vw,760px)!important;height:84%!important;}
+body #av-bg .av-word{left:66%!important;top:48%!important;opacity:.7;}
+body #accueil .av-pill{left:71%!important;transform:translate(-50%,12px)!important;}
+body #accueil .av-pill.show{transform:translate(-50%,0)!important;}
+body #accueil .av-pill strong{font-size:1.05rem!important;}
+body #accueil .av-dots{left:42%!important;right:0!important;}
+@media(max-width:900px){
+  body #accueil{justify-content:flex-end!important;align-items:center!important;text-align:center;padding:0 5% 128px!important;min-height:calc(100svh - var(--av-nav,64px))!important;}
+  body #accueil .av-shade{background:linear-gradient(0deg,rgba(7,10,20,0.97) 0%,rgba(7,10,20,0.9) 44%,rgba(7,10,20,0) 62%)!important;}
+  body #accueil .hero-content{align-items:center!important;text-align:center!important;max-width:520px!important;}
+  body #accueil .hero-badge{left:50%!important;transform:translateX(-50%)!important;top:16px!important;}
+  body #accueil .hero-logo-wrap{display:none!important;}
+  .hero-titre-tech{font-size:clamp(1.9rem,8vw,2.6rem);letter-spacing:-1px;margin-bottom:.7rem;}
+  body #accueil .hero-sub{text-align:center!important;font-size:.92rem!important;margin:0 auto 1.2rem!important;}
+  body #accueil .hero-btns{justify-content:center!important;flex-direction:row!important;gap:.6rem!important;}
+  body #accueil .btn-red,body #accueil .btn-out{padding:12px 20px!important;font-size:.78rem!important;}
+  body #av-bg .av-pic{left:50%!important;top:27%!important;width:96vw!important;height:40%!important;}
+  body #av-bg .av-word{left:50%!important;top:25%!important;font-size:34vw!important;}
+  body #accueil .av-pill{left:50%!important;right:auto!important;bottom:44px!important;max-width:calc(100% - 120px)!important;}
+  body #accueil .av-dots{left:0!important;}
+}
 </style>
 </body>
 </html>

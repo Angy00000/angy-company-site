@@ -213,18 +213,16 @@ footer p{font-size:0.8rem;margin-top:1rem;}
 html{background:var(--nuit);}
 body{background:transparent;color:#edf1f5;font-family:'Inter','Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
 
-/* Fond fixe */
-.bg-scene{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--nuit);pointer-events:none;}
-.bg-scene .bg-img{position:absolute;inset:-3%;background-size:cover;background-position:center;opacity:0;animation:bgFade 27s linear infinite;}
-.bg-scene .bg-1{background-image:url(images/bg-cerveau.jpg);background-position:center 32%;animation-delay:-1.35s;}
-.bg-scene .bg-2{background-image:url(images/bg-loupe.jpg);background-position:center 40%;animation-delay:7.65s;}
-.bg-scene .bg-3{background-image:url(images/bg-croissance.jpg);animation-delay:16.65s;}
-@keyframes bgFade{0%{opacity:0}5%{opacity:1}33.33%{opacity:1}38.33%{opacity:0}100%{opacity:0}}
-@media(min-width:900px){.bg-scene .bg-img{animation:bgFade 27s linear infinite,bgZoom 27s ease-in-out infinite alternate;}.bg-scene .bg-1{animation-delay:-1.35s,0s;}.bg-scene .bg-2{animation-delay:7.65s,-9s;}.bg-scene .bg-3{animation-delay:16.65s,-18s;}}
-@keyframes bgZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
-.bg-scene .bg-teinte{position:absolute;inset:0;background:linear-gradient(120deg,#15e7f9 0%,#0058f1 45%,#8229fc 100%);mix-blend-mode:color;opacity:.7;}
-.bg-scene::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,26,0.35) 0%,rgba(5,9,26,0.7) 45%,rgba(5,9,26,0.86) 100%);}
-@media(prefers-reduced-motion:reduce){.bg-scene .bg-img{animation:none!important;}.bg-scene .bg-1{opacity:1;}}
+/* Photos de fond réparties dans les sections (comme AngyOS) :
+   chaque photo est teintée aux couleurs du logo et se fond dans le bleu nuit. */
+body{background:var(--nuit);}
+#accueil.fond-hero,#poles.fond-poles,.contact-cadre{background-color:var(--nuit);background-blend-mode:normal,color,normal;background-size:cover;}
+#accueil.fond-hero{background-image:linear-gradient(180deg,rgba(5,9,26,0.35) 0%,rgba(5,9,26,0.62) 45%,#05091a 97%),linear-gradient(120deg,#15e7f9 0%,#0058f1 45%,#8229fc 100%),url(images/bg-cerveau.jpg);background-position:center 22%;}
+#poles.fond-poles{background-image:linear-gradient(180deg,#05091a 0%,rgba(5,9,26,0.55) 16%,rgba(5,9,26,0.7) 84%,#05091a 100%),linear-gradient(160deg,#15e7f9 0%,#0058f1 50%,#8229fc 100%),url(images/bg-croissance.jpg);background-position:center;}
+.contact-cadre{background-image:linear-gradient(90deg,rgba(5,9,26,0.92) 0%,rgba(5,9,26,0.6) 100%),linear-gradient(120deg,#15e7f9 0%,#0058f1 45%,#8229fc 100%),url(images/bg-loupe.jpg);background-position:70% 40%;}
+section#contact{background:transparent;padding:40px 5% 96px;}
+.contact-cadre{max-width:1100px;margin:0 auto;border-radius:28px;border:1px solid rgba(76,141,255,0.4);padding:4rem 2rem;box-shadow:0 30px 80px -30px rgba(47,91,255,0.6);}
+#apropos.fond-trame{background-image:linear-gradient(rgba(111,162,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(111,162,255,0.05) 1px,transparent 1px);background-size:44px 44px;}
 
 /* Navigation */
 nav{background:rgba(5,9,26,0.66);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:none;}
@@ -237,7 +235,7 @@ nav::after{background:var(--grad-texte);opacity:.7;height:1px;bottom:-1px;}
 @media(max-width:800px){.nav-links.open{background:rgba(5,9,26,0.97);border-bottom:1px solid rgba(255,255,255,0.1);}}
 
 /* Hero */
-#accueil{background:transparent;min-height:auto;padding:110px 5% 70px;}
+#accueil{min-height:auto;padding:110px 5% 70px;}
 .hero-content{max-width:900px;}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--verre);border:1px solid var(--verre-bord);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:1.5px;padding:8px 18px;margin-bottom:1.6rem;}
 .hero-badge .pt{width:8px;height:8px;border-radius:50%;background:#15e7f9;box-shadow:0 0 10px #15e7f9;animation:pt 1.6s ease-in-out infinite;}
@@ -272,7 +270,8 @@ nav::after{background:var(--grad-texte);opacity:.7;height:1px;bottom:-1px;}
 
 /* Sections */
 section{padding:96px 5%;}
-#apropos,#valeurs,#poles,#contact{background:transparent;}
+#valeurs{background:transparent;}
+section#apropos{background-color:transparent;}
 .sec-tag{font-family:'Inter',sans-serif;color:var(--eclat);font-size:.72rem;letter-spacing:3px;}
 .sec-title{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;letter-spacing:-1px;color:#fff;line-height:1.08;}
 .divider{background:var(--grad-texte);width:64px;}
@@ -400,7 +399,6 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
 </script>
 </head>
 <body>
-<div class="bg-scene" aria-hidden="true"><div class="bg-img bg-1"></div><div class="bg-img bg-2"></div><div class="bg-img bg-3"></div><div class="bg-teinte"></div></div>
 
 
 <nav>
@@ -418,7 +416,7 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
 </nav>
 
 <!-- HERO -->
-<section id="accueil">
+<section id="accueil" class="fond-hero">
   <div class="hero-content fadein">
     <div class="hero-badge"><span class="pt"></span>Sénégal · Depuis 2026</div>
     <div class="hero-logo-wrap">
@@ -451,7 +449,7 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
 </div></div>
 
 <!-- A PROPOS -->
-<section id="apropos">
+<section id="apropos" class="fond-trame">
   <div class="sec-tag">Qui sommes-nous</div>
   <h2 class="sec-title">À propos d'Angy Company</h2>
   <div class="divider"></div>
@@ -490,7 +488,7 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
 </section>
 
 <!-- POLES -->
-<section id="poles">
+<section id="poles" class="fond-poles">
   <div class="sec-tag">Nos activités</div>
   <h2 class="sec-title">Trois pôles, une même exigence</h2>
   <div class="divider"></div>
@@ -591,7 +589,7 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact"><div class="contact-cadre">
   <div class="sec-tag">Parlons-en</div>
   <h2 class="sec-title">Un projet en tête ?</h2>
   <div class="divider"></div>
@@ -601,7 +599,7 @@ footer{background:rgba(5,9,26,0.88);border-top:1px solid rgba(255,255,255,0.08);
     <a href="https://wa.me/221710538917" target="_blank" class="contact-btn wa">💬 WhatsApp</a>
     <a href="tel:+221710538917" class="contact-btn appel" style="color:#fff;">📞 Appeler</a>
   </div>
-</section>
+</div></section>
 
 <footer>
   <img src="images/logo-company-h-blanc.png" alt="Angy Company" style="height:44px;width:auto;margin-bottom:0.6rem;">

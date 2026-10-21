@@ -284,6 +284,17 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 .hero-pole-chip.chip-auto img{width:100%;max-width:150px;height:58px;object-fit:contain;}
 .chip-statut{display:block;font-size:.6rem;font-weight:700;color:rgba(255,255,255,0.72);letter-spacing:1px;text-transform:uppercase;}
 
+/* Angy Tech mis en avant : seul pôle actif */
+.pole-card.pole-tech{transform:scale(1.05);z-index:2;background:linear-gradient(160deg,rgba(47,127,255,0.24),rgba(255,255,255,0.05) 55%)!important;border:1px solid rgba(76,141,255,0.7)!important;border-top:3px solid #2f7fff!important;animation:techLueur 3s ease-in-out infinite!important;}
+.pole-card.pole-tech:hover{transform:translateY(-8px) scale(1.07);}
+@keyframes techLueur{0%,100%{box-shadow:0 0 0 1px rgba(47,127,255,0.35),0 26px 60px -22px rgba(47,127,255,0.6);}50%{box-shadow:0 0 0 1px rgba(76,141,255,0.8),0 34px 90px -18px rgba(47,127,255,0.95);}}
+@media(max-width:900px){.pole-card.pole-tech{transform:none;}.pole-card.pole-tech:hover{transform:translateY(-6px);}}
+.pole-dispo{display:inline-flex;align-items:center;gap:8px;width:fit-content;margin:0 0 1rem;padding:5px 13px;border-radius:999px;background:rgba(34,197,94,0.14);border:1px solid rgba(34,197,94,0.5);color:#7ff0a8;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:1;}
+.pole-dispo i,.chip-dispo i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:pt 1.6s ease-in-out infinite;}
+.chip-tech{background:rgba(47,127,255,0.2)!important;border:1px solid rgba(76,141,255,0.75)!important;box-shadow:0 14px 40px -12px rgba(47,127,255,0.8)!important;transform:scale(1.06);}
+.chip-tech:hover{transform:translateY(-6px) scale(1.09)!important;}
+.chip-dispo{display:inline-flex;align-items:center;gap:6px;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7ff0a8;}
+
 /* Sections */
 section{padding:96px 5%;}
 #valeurs{background:transparent;}
@@ -448,7 +459,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
       <a href="#poles" class="btn-verre">Découvrir nos pôles →</a>
     </div>
     <div class="hero-poles">
-      <div class="hero-pole-chip" style="cursor:pointer;" onclick="window.location.href='tech.html'"><img src="images/icon-tech-192.png" alt="Angy Tech">Angy Tech</div>
+      <div class="hero-pole-chip chip-tech" style="cursor:pointer;" onclick="window.location.href='tech.html'"><img src="images/icon-tech-192.png" alt="Angy Tech">Angy Tech<span class="chip-dispo"><i></i>Disponible</span></div>
       <div class="hero-pole-chip chip-avenir"><img src="images/icon-immo-192.png" alt="Angy Immo">Angy Immobilier<span class="chip-statut">Projet à venir</span></div>
       <div class="hero-pole-chip chip-avenir chip-auto"><img src="images/auto-voiture.png" alt="Angy Automobile">Angy Automobile<span class="chip-statut">Projet à venir</span></div>
     </div>
@@ -511,7 +522,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
 
     <div class="pole-card pole-tech fadein" onclick="if(event.target.tagName!=='A'){window.location.href='tech.html';}" style="cursor:pointer;">
       <div class="pole-index">01</div>
-      <div class="pole-eyebrow">Technologie</div>
+      <div class="pole-eyebrow">Technologie</div><div class="pole-dispo"><i></i>Disponible maintenant</div>
       <img class="pole-logo" src="images/logo-tech-carte.png" alt="Angy Tech">
       <div class="pole-name">Angy Tech</div>
       <div class="pole-tagline">Vente de produits high-tech et d'équipements électroniques : iPhones, Samsung, MacBook, accessoires et plus.</div>

@@ -270,16 +270,18 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 @keyframes defile{to{transform:translateX(-50%);}}
 
 /* Pôles en suspens : Immobilier et Automobile, projets à venir */
-.pole-avenir{cursor:default!important;opacity:.62;filter:saturate(.55);}
+.pole-avenir{cursor:default!important;}
 .pole-avenir:hover{transform:none!important;}
 .pole-avenir::after{display:none;}
-.pole-statut{display:inline-block;width:fit-content;margin:0 0 1rem;padding:4px 12px;border-radius:999px;border:1px dashed rgba(255,255,255,0.4);color:rgba(255,255,255,0.85);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
-.pole-btn-avenir{background:transparent!important;border:1px dashed rgba(255,255,255,0.3);color:rgba(255,255,255,0.6)!important;cursor:default;}
+.pole-statut{display:inline-block;width:fit-content;margin:0 0 1rem;padding:4px 12px;border-radius:999px;border:1px solid var(--pole-accent);color:var(--pole-accent);background:rgba(255,255,255,0.04);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
+.pole-btn-avenir{cursor:default;border:none;}
+.pole-immo .pole-btn-avenir{background:linear-gradient(120deg,#f6dc7e,#d4a72c)!important;color:#2a1d00!important;box-shadow:0 10px 26px -8px rgba(212,167,44,0.7);}
+.pole-auto .pole-btn-avenir{background:linear-gradient(120deg,#ffb066,#ff5a1f)!important;color:#fff!important;box-shadow:0 10px 26px -8px rgba(255,90,31,0.7);}
 .pole-btn-avenir:hover{transform:none;box-shadow:none;}
-.chip-avenir{opacity:.55;cursor:default;}
+.chip-avenir{cursor:default;}
 .chip-avenir:hover{transform:none!important;background:var(--verre)!important;border-color:var(--verre-bord)!important;box-shadow:none!important;}
 .chip-avenir::after{display:none;}
-.chip-statut{display:block;font-size:.6rem;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;}
+.chip-statut{display:block;font-size:.6rem;font-weight:700;color:#f2d675;letter-spacing:1px;text-transform:uppercase;}
 
 /* Sections */
 section{padding:96px 5%;}
@@ -303,9 +305,9 @@ section#apropos{background-color:transparent;}
 /* Pôles : cartes en verre, couleur de chaque pôle en accent */
 .pole-card{background:rgba(255,255,255,0.05)!important;border:1px solid var(--verre-bord)!important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);animation:none!important;box-shadow:0 20px 50px -25px rgba(0,0,0,0.8)!important;border-radius:24px;}
 .pole-card::before{opacity:1;padding:0;background:radial-gradient(120% 60% at 0% 0%,var(--pole-lueur),transparent 60%);-webkit-mask:none;mask:none;}
-.pole-tech{--pole-lueur:rgba(47,127,255,0.28);border-top:3px solid #2f7fff!important;}
-.pole-immo{--pole-lueur:rgba(212,175,55,0.26);border-top:3px solid var(--gold)!important;}
-.pole-auto{--pole-lueur:rgba(255,122,26,0.26);border-top:3px solid #ff7a1a!important;}
+.pole-tech{--pole-lueur:rgba(47,127,255,0.32);border-top:3px solid #2f7fff!important;}
+.pole-immo{--pole-lueur:rgba(232,190,60,0.4);--pole-accent:#f2d675;border-top:3px solid var(--gold)!important;}
+.pole-auto{--pole-lueur:rgba(255,110,30,0.42);--pole-accent:#ffa45c;border-top:3px solid #ff7a1a!important;}
 .pole-tech:hover{border-color:rgba(47,127,255,0.7)!important;}
 .pole-immo:hover{border-color:rgba(212,175,55,0.7)!important;}
 .pole-auto:hover{border-color:rgba(255,122,26,0.7)!important;}
@@ -525,6 +527,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
       <div class="pole-index">02</div>
       <div class="pole-eyebrow">Immobilier</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-immo-carte.png" alt="Angy Immo">
+      <div class="pole-name">Angy Immobilier</div>
       <div class="pole-tagline">Achat, vente, location et gestion de biens : nous simplifions vos transactions immobilières.</div>
       <ul class="pole-list">
         <li>Vente & achat de terrains, maisons</li>
@@ -532,13 +535,14 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
         <li>Gestion locative & estimation</li>
         <li>Conseil en investissement</li>
       </ul>
-      <span class="pole-btn pole-btn-avenir">Bientôt</span>
+      <span class="pole-btn pole-btn-avenir">Bientôt disponible</span>
     </div>
 
     <div class="pole-card pole-auto pole-avenir fadein">
       <div class="pole-index">03</div>
       <div class="pole-eyebrow">Automobile</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-auto-carte.png" alt="Angy Automobile">
+      <div class="pole-name">Angy Automobile</div>
       <div class="pole-tagline">Vente, achat, importation et location de véhicules, ainsi que des services d'entretien et de diagnostic.</div>
       <ul class="pole-list">
         <li>Vente, achat & importation de véhicules</li>
@@ -546,7 +550,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
         <li>Pièces détachées & diagnostic</li>
         <li>Garages partenaires</li>
       </ul>
-      <span class="pole-btn pole-btn-avenir">Bientôt</span>
+      <span class="pole-btn pole-btn-avenir">Bientôt disponible</span>
     </div>
 
   </div>

@@ -295,6 +295,32 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 .chip-tech:hover{transform:translateY(-6px) scale(1.09)!important;}
 .chip-dispo{display:inline-flex;align-items:center;gap:6px;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7ff0a8;}
 
+/* Sénégal : drapeau dessiné en CSS (l'émoji s'affiche « SN » sur Windows) */
+.drapeau{display:inline-flex;width:24px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,0.25);flex:none;vertical-align:middle;}
+.drapeau i{flex:1;display:flex;align-items:center;justify-content:center;}
+.drapeau i:nth-child(1){background:#00853f;}
+.drapeau i:nth-child(2){background:#fdef42;}
+.drapeau i:nth-child(3){background:#e31b23;}
+.drapeau b{color:#00853f;font-size:9px;line-height:1;font-style:normal;}
+.stat-senegal{background:linear-gradient(90deg,#1fbf6a,#fdef42,#ff3b3b)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;}
+#senegal{background:transparent;}
+.senegal-cadre{max-width:980px;margin:0 auto;text-align:center;padding:3.2rem 2rem;border-radius:28px;background:linear-gradient(135deg,rgba(0,133,63,0.2),rgba(253,239,66,0.07) 50%,rgba(227,27,35,0.2));border:1px solid rgba(253,239,66,0.3);position:relative;overflow:hidden;}
+.senegal-cadre::before{content:'';position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#00853f 0 33.3%,#fdef42 33.3% 66.6%,#e31b23 66.6%);}
+.senegal-drapeau-grand .drapeau{width:66px;height:44px;border-radius:8px;margin-bottom:1.2rem;box-shadow:0 12px 30px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.25);animation:flotteDrapeau 4s ease-in-out infinite;}
+.senegal-drapeau-grand .drapeau b{font-size:22px;}
+@keyframes flotteDrapeau{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-6px) rotate(2deg);}}
+#senegal .sec-tag{color:#fdef42;}
+.senegal-texte{background:linear-gradient(90deg,#1fbf6a,#fdef42,#ff3b3b);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.divider.senegal-filet{background:linear-gradient(90deg,#00853f 0 33.3%,#fdef42 33.3% 66.6%,#e31b23 66.6%);}
+.senegal-points{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;margin:0 auto 1.8rem;max-width:860px;}
+@media(max-width:760px){.senegal-points{grid-template-columns:1fr 1fr;}}
+.senegal-point{display:flex;flex-direction:column;align-items:center;gap:8px;padding:1.1rem .8rem;border-radius:18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);font-weight:600;font-size:.92rem;color:#fff;}
+.senegal-point span{font-size:1.6rem;}
+.senegal-wolof{font-size:1.3rem;font-weight:700;color:#fdef42;}
+.senegal-wolof em{display:block;font-style:normal;font-size:.85rem;font-weight:500;color:rgba(255,255,255,0.65);margin-top:4px;}
+.fait-dakar{display:inline-flex;align-items:center;gap:10px;font-weight:600;color:rgba(255,255,255,0.8)!important;}
+.hero-badge .drapeau{margin-right:2px;}
+
 /* Sections */
 section{padding:96px 5%;}
 #valeurs{background:transparent;}
@@ -446,7 +472,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
 <!-- HERO -->
 <section id="accueil" class="fond-hero">
   <div class="hero-content fadein">
-    <div class="hero-badge"><span class="pt"></span>Sénégal · Depuis 2026</div>
+    <div class="hero-badge"><span class="drapeau" role="img" aria-label="Drapeau du Sénégal"><i></i><i><b>★</b></i><i></i></span>Sénégal · Depuis 2026</div>
     <div class="hero-logo-wrap">
       <div class="hero-logo-glow"></div>
       <img src="images/logo-company-blanc.png" alt="Angy Company" class="hero-logo-img">
@@ -465,7 +491,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Pôles d'activité</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Sénégalais</div></div>
+      <div class="hero-stat"><div class="hero-stat-num stat-senegal">100%</div><div class="hero-stat-label">Sénégalais</div></div>
       <div class="hero-stat"><div class="hero-stat-num">2026</div><div class="hero-stat-label">Depuis</div></div>
     </div>
   </div>
@@ -494,6 +520,24 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
   <div class="divider"></div>
   <p>Angy Company a pour ambition de devenir un acteur incontournable dans ses trois domaines d'activité en proposant une plateforme moderne qui connecte les clients à des solutions technologiques, immobilières et automobiles de qualité, tout en contribuant au développement économique et à la transformation digitale du Sénégal.</p>
 </div></section>
+
+<!-- SENEGAL -->
+<section id="senegal">
+  <div class="senegal-cadre">
+    <div class="senegal-drapeau-grand"><span class="drapeau" role="img" aria-label="Drapeau du Sénégal"><i></i><i><b>★</b></i><i></i></span></div>
+    <div class="sec-tag">Made in Sénégal</div>
+    <h2 class="sec-title">Fièrement <span class="senegal-texte">sénégalais</span></h2>
+    <div class="divider senegal-filet"></div>
+    <p class="sec-desc">Une entreprise née à Dakar, pensée pour le Sénégal : vos moyens de paiement, votre façon d'acheter, et une confiance qui se construit ici, chez nous.</p>
+    <div class="senegal-points">
+      <div class="senegal-point"><span>📍</span>Basés à Dakar</div>
+      <div class="senegal-point"><span>💳</span>Wave, Orange Money ou espèces</div>
+      <div class="senegal-point"><span>💬</span>Tout se fait sur WhatsApp</div>
+      <div class="senegal-point"><span>🤝</span>Une équipe sénégalaise</div>
+    </div>
+    <p class="senegal-wolof">Dalal ak jàmm ! <em>Bienvenue chez vous.</em></p>
+  </div>
+</section>
 
 <!-- VALEURS -->
 <section id="valeurs">
@@ -636,6 +680,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
         <a href="https://whatsapp.com/channel/0029Vb7clpAKQuJI3buqFq0A" target="_blank" class="fsoc" title="WhatsApp Channel"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
   <div style="margin-top:1.4rem;">🌐 Service 100% en ligne · +221 71 053 89 17</div>
   <div style="margin-top:.6rem;">💻 Nos logiciels de gestion : <a href="https://angyos.com" target="_blank" rel="noopener" style="color:#2f7fff;font-weight:700;">AngyOS</a></div>
+  <p class="fait-dakar"><span class="drapeau" role="img" aria-label="Drapeau du Sénégal"><i></i><i><b>★</b></i><i></i></span>Fait avec fierté à Dakar, Sénégal</p>
   <p>© 2026 Angy Company. Tous droits réservés.</p>
 </footer>
 

@@ -261,19 +261,12 @@ nav::after{background:var(--tricolore);opacity:.7;height:1px;bottom:-1px;}
 .hero-stat-label{font-size:.68rem;color:rgba(255,255,255,0.6);}
 @media(max-width:600px){.hero-stat{min-width:0;padding:12px 4px;}.hero-stat-num{font-size:1.5rem;}.hero-stat-label{font-size:.58rem;letter-spacing:1px;}}
 
-/* Bandeaux croisés en X : pôles (dégradé du logo) devant, produits (doré) derrière */
-.bandeaux{position:relative;height:170px;overflow:hidden;margin:6px 0 0;}
-.bandeau{position:absolute;left:-6%;width:112%;top:50%;padding:13px 0;}
-.bandeau-marque{background:var(--grad-marque);transform:translateY(-50%) rotate(-3deg);z-index:2;box-shadow:0 14px 34px rgba(0,0,0,0.5);}
-.bandeau-or{background:rgba(242,214,117,0.1);border-top:1px solid rgba(242,214,117,0.4);border-bottom:1px solid rgba(242,214,117,0.4);transform:translateY(-50%) rotate(3deg);z-index:1;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
-.bandeau-piste{display:flex;align-items:center;width:max-content;animation:defile 40s linear infinite;}
-.bandeau-piste.inverse{animation-direction:reverse;animation-duration:55s;}
-.bandeau-piste span{padding:0 34px 0 12px;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;color:#fff;}
-.bandeau-or .bandeau-piste span{color:var(--or);font-weight:600;font-size:.9rem;}
-.bandeau-piste img{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));}
-.bandeau-piste i{width:7px;height:7px;transform:rotate(45deg);background:var(--or);flex:none;}
+/* Bandeau simple : une ligne discrète, les pôles qui défilent lentement */
+.bandeau{overflow:hidden;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
+.bandeau-piste{display:flex;align-items:center;gap:64px;width:max-content;padding-right:64px;animation:defile 45s linear infinite;}
+.bandeau-piste span{display:inline-flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;color:rgba(255,255,255,0.75);white-space:nowrap;}
+.bandeau-piste img{width:26px;height:26px;object-fit:contain;}
 @keyframes defile{to{transform:translateX(-50%);}}
-@media(max-width:600px){.bandeaux{height:130px;}.bandeau{padding:10px 0;}.bandeau-piste span{font-size:.85rem;letter-spacing:2px;padding:0 12px;}.bandeau-piste img{width:24px;height:24px;}}
 
 /* Sections */
 section{padding:96px 5%;}
@@ -451,10 +444,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
   </div>
 </section>
 
-<div class="bandeaux" aria-hidden="true">
-  <div class="bandeau bandeau-or"><div class="bandeau-piste inverse"><span>iPhone</span><i></i><span>Samsung</span><i></i><span>MacBook</span><i></i><span>Consoles</span><i></i><span>Terrains</span><i></i><span>Villas</span><i></i><span>Location</span><i></i><span>Véhicules</span><i></i><span>Importation</span><i></i><span>AngyOS</span><i></i><span>iPhone</span><i></i><span>Samsung</span><i></i><span>MacBook</span><i></i><span>Consoles</span><i></i><span>Terrains</span><i></i><span>Villas</span><i></i><span>Location</span><i></i><span>Véhicules</span><i></i><span>Importation</span><i></i><span>AngyOS</span><i></i><span>iPhone</span><i></i><span>Samsung</span><i></i><span>MacBook</span><i></i><span>Consoles</span><i></i><span>Terrains</span><i></i><span>Villas</span><i></i><span>Location</span><i></i><span>Véhicules</span><i></i><span>Importation</span><i></i><span>AngyOS</span><i></i><span>iPhone</span><i></i><span>Samsung</span><i></i><span>MacBook</span><i></i><span>Consoles</span><i></i><span>Terrains</span><i></i><span>Villas</span><i></i><span>Location</span><i></i><span>Véhicules</span><i></i><span>Importation</span><i></i><span>AngyOS</span><i></i></div></div>
-  <div class="bandeau bandeau-marque"><div class="bandeau-piste"><img src="images/icon-company-48.png" alt=""><span>Angy Company</span><img src="images/icon-tech-48.png" alt=""><span>Angy Tech</span><img src="images/icon-immo-48.png" alt=""><span>Angy Immobilier</span><img src="images/icon-auto-48.png" alt=""><span>Angy Automobile</span><img src="images/icon-company-48.png" alt=""><span>Angy Company</span><img src="images/icon-tech-48.png" alt=""><span>Angy Tech</span><img src="images/icon-immo-48.png" alt=""><span>Angy Immobilier</span><img src="images/icon-auto-48.png" alt=""><span>Angy Automobile</span><img src="images/icon-company-48.png" alt=""><span>Angy Company</span><img src="images/icon-tech-48.png" alt=""><span>Angy Tech</span><img src="images/icon-immo-48.png" alt=""><span>Angy Immobilier</span><img src="images/icon-auto-48.png" alt=""><span>Angy Automobile</span><img src="images/icon-company-48.png" alt=""><span>Angy Company</span><img src="images/icon-tech-48.png" alt=""><span>Angy Tech</span><img src="images/icon-immo-48.png" alt=""><span>Angy Immobilier</span><img src="images/icon-auto-48.png" alt=""><span>Angy Automobile</span></div></div>
-</div>
+<div class="bandeau" aria-hidden="true"><div class="bandeau-piste"><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span><span><img src="images/icon-tech-48.png" alt="">Angy Tech</span><span><img src="images/icon-immo-48.png" alt="">Angy Immobilier</span><span><img src="images/icon-auto-48.png" alt="">Angy Automobile</span><span><img src="images/icon-os-48.png" alt="">AngyOS</span></div></div>
 
 <!-- A PROPOS -->
 <section id="apropos" class="fond-trame">

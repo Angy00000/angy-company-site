@@ -2805,7 +2805,9 @@ section{padding:96px 5%;}
 #fond-sections .fs-accessoires{background-image:url(images/fond-tech-accessoires.jpg);background-position:center 40%;filter:brightness(.62) contrast(1.05);}
 #fond-sections .fs-gaming{background-image:url(images/fond-tech-gaming.jpg);}
 #fond-sections .fs-ordinateurs{background-image:url(images/fond-tech-ordinateurs.jpg);background-position:center 35%;}
-html body section#iphones:not(.x),html body section#accessoires:not(.x),html body section#gaming:not(.x),html body section#ordinateurs:not(.x){background-color:transparent!important;background:linear-gradient(180deg,#070a14 0px,rgba(7,10,20,0) 120px,rgba(7,10,20,0) calc(100% - 120px),#070a14 100%)!important;}
+#fond-sections .fs-reparation{background-image:url(images/fond-tech-reparation.jpg);background-position:center 45%;}
+#fond-sections .fs-occasion{background-image:url(images/fond-tech-occasion.jpg);background-position:center 45%;}
+html body section#iphones:not(.x),html body section#accessoires:not(.x),html body section#gaming:not(.x),html body section#ordinateurs:not(.x),html body section#reparation:not(.x),html body section#occasion:not(.x),html body section#troc:not(.x){background-color:transparent!important;background:linear-gradient(180deg,#070a14 0px,rgba(7,10,20,0) 120px,rgba(7,10,20,0) calc(100% - 120px),#070a14 100%)!important;}
 @media(prefers-reduced-motion:reduce){#fond-sections .fs{transition:opacity .3s;transform:none!important;}}
 
 /* Cartes en verre */
@@ -2938,13 +2940,13 @@ body #accueil .av-dots{left:64%!important;right:0!important;}
   body #accueil .av-dots{left:0!important;}
 }
 </style>
-<div id="fond-sections" aria-hidden="true"><div class="fs fs-iphones" data-s="iphones"></div><div class="fs fs-accessoires" data-s="accessoires"></div><div class="fs fs-gaming" data-s="gaming"></div><div class="fs fs-ordinateurs" data-s="ordinateurs"></div></div>
+<div id="fond-sections" aria-hidden="true"><div class="fs fs-iphones" data-s="iphones"></div><div class="fs fs-accessoires" data-s="accessoires"></div><div class="fs fs-gaming" data-s="gaming"></div><div class="fs fs-ordinateurs" data-s="ordinateurs"></div><div class="fs fs-reparation" data-s="reparation"></div><div class="fs fs-occasion" data-s="occasion"></div></div>
 <script>
 (function(){
-  var ids=['iphones','accessoires','gaming','ordinateurs'],vis={};
+  var ids=['iphones','accessoires','gaming','ordinateurs','reparation','occasion','troc'],vis={};var alias={troc:'occasion'};
   var layers={};document.querySelectorAll('#fond-sections .fs').forEach(function(l){layers[l.dataset.s]=l;});
   function maj(){var best=null,max=0;ids.forEach(function(i){if((vis[i]||0)>max){max=vis[i];best=i;}});
-    ids.forEach(function(i){layers[i].classList.toggle('on',i===best&&max>0.15);});}
+    var cible=alias[best]||best;Object.keys(layers).forEach(function(k){layers[k].classList.toggle('on',k===cible&&max>0.15);});}
   if(!('IntersectionObserver' in window))return;
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var r=e.intersectionRect.height/window.innerHeight;vis[e.target.id]=e.isIntersecting?r:0;});maj();},{threshold:[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]});
   ids.forEach(function(i){var s=document.getElementById(i);if(s)io.observe(s);});

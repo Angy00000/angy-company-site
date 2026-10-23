@@ -456,6 +456,7 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
 /* ===================================================================
    FONDS PLEIN ÉCRAN COMME ANGY TECH : un calque fixe de la taille de l'écran,
    la photo de la section visible apparaît en fondu (avec léger zoom) au défilement.
+   Trois photos : cerveau, croissance, loupe.
    =================================================================== */
 body{background:transparent!important;}
 #fond-sections{position:fixed;inset:0;z-index:-1;pointer-events:none;background:#070a14;}
@@ -464,8 +465,6 @@ body{background:transparent!important;}
 #fond-sections::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 90% at 50% 40%,rgba(7,10,20,0.25) 0%,rgba(7,10,20,0.55) 60%,rgba(7,10,20,0.85) 100%),linear-gradient(180deg,rgba(7,10,20,0.3),rgba(7,10,20,0.45));}
 #fond-sections .fs-cerveau{background-image:url(images/bg-cerveau.jpg);background-position:center 22%;}
 #fond-sections .fs-croissance{background-image:url(images/bg-croissance.jpg);background-position:center;}
-#fond-sections .fs-iphones{background-image:url(images/fond-tech-iphones.jpg);background-position:center 30%;}
-#fond-sections .fs-ordinateurs{background-image:url(images/fond-tech-ordinateurs.jpg);background-position:center 35%;}
 #fond-sections .fs-loupe{background-image:url(images/bg-loupe.jpg);background-position:70% 40%;}
 html body section#accueil:not(.x){background:linear-gradient(180deg,rgba(7,10,20,0) 0%,rgba(7,10,20,0) 75%,#070a14 100%)!important;background-color:transparent!important;}
 html body section#ambition:not(.x),html body section#valeurs:not(.x),html body section#poles:not(.x),html body section#angyos:not(.x),html body section#contact:not(.x){background:linear-gradient(180deg,#070a14 0px,rgba(7,10,20,0) 120px,rgba(7,10,20,0) calc(100% - 120px),#070a14 100%)!important;background-color:transparent!important;}
@@ -476,7 +475,7 @@ html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdro
 </style>
 </head>
 <body>
-<div id="fond-sections" aria-hidden="true"><div class="fs fs-cerveau on" data-s="cerveau"></div><div class="fs fs-croissance" data-s="croissance"></div><div class="fs fs-iphones" data-s="iphones"></div><div class="fs fs-ordinateurs" data-s="ordinateurs"></div><div class="fs fs-loupe" data-s="loupe"></div></div>
+<div id="fond-sections" aria-hidden="true"><div class="fs fs-cerveau on" data-s="cerveau"></div><div class="fs fs-croissance" data-s="croissance"></div><div class="fs fs-loupe" data-s="loupe"></div></div>
 
 
 <nav>
@@ -752,9 +751,9 @@ document.querySelectorAll('.pole-card, .hero-pole-chip, .pole-btn, .nav-cta, .bt
 })();
 </script>
 <script>
-/* Fonds plein écran comme Angy Tech : la photo change selon la section visible */
+/* Fonds plein écran comme Angy Tech : la photo change selon la section visible (3 photos) */
 (function(){
-  var carte={accueil:'cerveau',apropos:'cerveau',ambition:'croissance',valeurs:'croissance',poles:'iphones',angyos:'ordinateurs',contact:'loupe'},vis={};
+  var carte={accueil:'cerveau',apropos:'cerveau',ambition:'cerveau',valeurs:'croissance',poles:'croissance',angyos:'croissance',contact:'loupe'},vis={};
   var layers={};document.querySelectorAll('#fond-sections .fs').forEach(function(l){layers[l.dataset.s]=l;});
   function maj(){var best=null,max=0;Object.keys(carte).forEach(function(i){if((vis[i]||0)>max){max=vis[i];best=i;}});
     if(!best||max<0.15)return;var cible=carte[best];Object.keys(layers).forEach(function(k){layers[k].classList.toggle('on',k===cible);});}

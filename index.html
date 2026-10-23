@@ -452,8 +452,31 @@ footer{background:rgba(7,10,20,0.88);border-top:1px solid rgba(255,255,255,0.08)
  ]
 }
 </script>
+<style>
+/* ===================================================================
+   FONDS PLEIN ÉCRAN COMME ANGY TECH : un calque fixe de la taille de l'écran,
+   la photo de la section visible apparaît en fondu (avec léger zoom) au défilement.
+   =================================================================== */
+body{background:transparent!important;}
+#fond-sections{position:fixed;inset:0;z-index:-1;pointer-events:none;background:#070a14;}
+#fond-sections .fs{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 6s ease;}
+#fond-sections .fs.on{opacity:1;transform:scale(1);}
+#fond-sections::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 120% 90% at 50% 40%,rgba(7,10,20,0.25) 0%,rgba(7,10,20,0.55) 60%,rgba(7,10,20,0.85) 100%),linear-gradient(180deg,rgba(7,10,20,0.3),rgba(7,10,20,0.45));}
+#fond-sections .fs-cerveau{background-image:url(images/bg-cerveau.jpg);background-position:center 22%;}
+#fond-sections .fs-croissance{background-image:url(images/bg-croissance.jpg);background-position:center;}
+#fond-sections .fs-iphones{background-image:url(images/fond-tech-iphones.jpg);background-position:center 30%;}
+#fond-sections .fs-ordinateurs{background-image:url(images/fond-tech-ordinateurs.jpg);background-position:center 35%;}
+#fond-sections .fs-loupe{background-image:url(images/bg-loupe.jpg);background-position:70% 40%;}
+html body section#accueil:not(.x){background:linear-gradient(180deg,rgba(7,10,20,0) 0%,rgba(7,10,20,0) 75%,#070a14 100%)!important;background-color:transparent!important;}
+html body section#ambition:not(.x),html body section#valeurs:not(.x),html body section#poles:not(.x),html body section#angyos:not(.x),html body section#contact:not(.x){background:linear-gradient(180deg,#070a14 0px,rgba(7,10,20,0) 120px,rgba(7,10,20,0) calc(100% - 120px),#070a14 100%)!important;background-color:transparent!important;}
+html body section#apropos:not(.x){background:linear-gradient(rgba(242,214,117,0.045) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,rgba(242,214,117,0.045) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(180deg,#070a14 0px,rgba(7,10,20,0) 120px,rgba(7,10,20,0) calc(100% - 120px),#070a14 100%)!important;background-color:transparent!important;}
+html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
+.bandeau{background:#070a14;}
+@media(prefers-reduced-motion:reduce){#fond-sections .fs{transition:opacity .3s;transform:none!important;}}
+</style>
 </head>
 <body>
+<div id="fond-sections" aria-hidden="true"><div class="fs fs-cerveau on" data-s="cerveau"></div><div class="fs fs-croissance" data-s="croissance"></div><div class="fs fs-iphones" data-s="iphones"></div><div class="fs fs-ordinateurs" data-s="ordinateurs"></div><div class="fs fs-loupe" data-s="loupe"></div></div>
 
 
 <nav>
@@ -726,6 +749,18 @@ document.querySelectorAll('.pole-card, .hero-pole-chip, .pole-btn, .nav-cta, .bt
   });
 
   startAuto();
+})();
+</script>
+<script>
+/* Fonds plein écran comme Angy Tech : la photo change selon la section visible */
+(function(){
+  var carte={accueil:'cerveau',apropos:'cerveau',ambition:'croissance',valeurs:'croissance',poles:'iphones',angyos:'ordinateurs',contact:'loupe'},vis={};
+  var layers={};document.querySelectorAll('#fond-sections .fs').forEach(function(l){layers[l.dataset.s]=l;});
+  function maj(){var best=null,max=0;Object.keys(carte).forEach(function(i){if((vis[i]||0)>max){max=vis[i];best=i;}});
+    if(!best||max<0.15)return;var cible=carte[best];Object.keys(layers).forEach(function(k){layers[k].classList.toggle('on',k===cible);});}
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id]=e.isIntersecting?e.intersectionRect.height/window.innerHeight:0;});maj();},{threshold:[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]});
+  Object.keys(carte).forEach(function(i){var s=document.getElementById(i);if(s)io.observe(s);});
 })();
 </script>
 </body>

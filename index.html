@@ -133,7 +133,7 @@ section{padding:90px 5%;}
 
 /* POLES */
 #poles{background:#fff;}
-.poles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;max-width:1200px;margin:0 auto;}
+.poles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.8rem;max-width:1100px;margin:0 auto;}
 @media(max-width:900px){.poles-grid{grid-template-columns:1fr;}}
 .pole-card{border-radius:20px;padding:2.2rem 1.8rem;color:#fff;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s cubic-bezier(.2,.8,.2,1),border-color .5s;display:flex;flex-direction:column;min-height:520px;border:1px solid rgba(255,255,255,0.08);will-change:transform;}
 .pole-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,0.5),transparent 40%,transparent 60%,rgba(255,255,255,0.25));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .5s;pointer-events:none;}
@@ -347,6 +347,8 @@ section#apropos{background-color:transparent;}
 .pole-tech{--pole-lueur:rgba(47,127,255,0.32);border-top:3px solid #2f7fff!important;}
 .pole-immo{--pole-lueur:rgba(168,85,247,0.42);--pole-accent:#c9a2ff;border-top:3px solid #a855f7!important;}
 .pole-auto{--pole-lueur:rgba(255,45,70,0.42);--pole-accent:#ff8a98;border-top:3px solid #ff2d46!important;}
+.pole-qualite{--pole-lueur:rgba(34,197,94,0.38);--pole-accent:#86efac;border-top:3px solid #22c55e!important;}
+.pole-qualite .pole-mot{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:1.5px;line-height:1;margin:.2rem 0 .4rem}.pole-qualite .pole-mot b{color:#22c55e;font-weight:400}
 .pole-tech:hover{border-color:rgba(47,127,255,0.7)!important;}
 .pole-immo:hover{border-color:rgba(168,85,247,0.7)!important;}
 .pole-auto:hover{border-color:rgba(255,45,70,0.7)!important;}
@@ -358,6 +360,11 @@ section#apropos{background-color:transparent;}
 .pole-immo .pole-list li::before{color:#c9a2ff;}
 .pole-auto .pole-list li::before{color:#ff8a98;}
 .pole-tech .pole-eyebrow{background:rgba(47,127,255,0.16);color:#9cc0ff;border-color:rgba(47,127,255,0.4);}
+.pole-card.pole-qualite{background:linear-gradient(160deg,rgba(34,197,94,0.2),rgba(255,255,255,0.05) 55%)!important;border:1px solid rgba(34,197,94,0.55)!important;border-top:3px solid #22c55e!important;}
+.pole-qualite .pole-btn{background:linear-gradient(135deg,#15803d,#22c55e,#a3e635);color:#fff;}
+.pole-qualite .pole-list li::before{color:#4ade80;}
+.pole-qualite .pole-eyebrow{background:rgba(34,197,94,0.16);color:#86efac;border-color:rgba(34,197,94,0.45);}
+.pole-sceau{display:block;height:150px;width:auto;margin:.2rem 0 .6rem;position:relative;z-index:1;filter:drop-shadow(0 10px 24px rgba(34,197,94,0.35));}
 .pole-immo .pole-eyebrow{background:rgba(168,85,247,0.16);color:#d8bbff;border-color:rgba(168,85,247,0.45);}
 .pole-auto .pole-eyebrow{background:rgba(255,45,70,0.16);color:#ffa3ae;border-color:rgba(255,45,70,0.45);}
 
@@ -484,6 +491,7 @@ html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdro
     <ul class="nav-links">
       <li><a href="#apropos">À propos</a></li>
       <li><a href="#poles">Nos pôles</a></li>
+      <li><a href="qualite.html">Qualité</a></li>
       <li><a href="#angyos" class="nav-angyos">Nos logiciels</a></li>
       <li><a href="#valeurs">Valeurs</a></li>
       <li><a href="https://wa.me/221710538917" target="_blank" rel="noopener" class="nav-cta">Nous écrire</a></li>
@@ -564,7 +572,7 @@ html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdro
 <!-- POLES -->
 <section id="poles" class="fond-poles">
   <div class="sec-tag">Nos activités</div>
-  <h2 class="sec-title">Trois pôles, une même exigence</h2>
+  <h2 class="sec-title">Quatre pôles, une même exigence</h2>
   <div class="divider"></div>
   <p class="sec-desc">Chaque pôle d'Angy Company est pensé pour offrir un service professionnel, transparent et centré sur vos besoins.</p>
   <div class="poles-grid">
@@ -584,8 +592,23 @@ html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdro
       <a href="tech.html" class="pole-btn">Découvrir Angy Tech →</a>
     </div>
 
-    <div class="pole-card pole-immo pole-avenir fadein">
+    <div class="pole-card pole-qualite fadein" onclick="if(event.target.tagName!=='A'){window.location.href='qualite.html';}" style="cursor:pointer;">
       <div class="pole-index">02</div>
+      <div class="pole-eyebrow">Qualité · QHSE</div><div class="pole-dispo"><i></i>Disponible maintenant</div>
+      <svg class="pole-sceau" viewBox="0 0 160 160" role="img" aria-label="Angy Qualité"><defs><linearGradient id="gq" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15803d"/><stop offset=".55" stop-color="#22c55e"/><stop offset="1" stop-color="#a3e635"/></linearGradient></defs><path d="M80 6l14 10 17-2 7 16 16 7-2 17 10 14-10 14 2 17-16 7-7 16-17-2-14 10-14-10-17 2-7-16-16-7 2-17-10-14 10-14-2-17 16-7 7-16 17 2z" fill="url(#gq)"/><circle cx="80" cy="80" r="48" fill="#06140c" opacity=".55"/><path d="M58 82l15 15 31-34" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="124" text-anchor="middle" font-family="Outfit,sans-serif" font-size="15" font-weight="800" fill="#fff" letter-spacing="2">ISO</text></svg>
+      <div class="pole-name">Angy Qualité</div>
+      <div class="pole-tagline">Accompagnement des PME jusqu'à la certification ISO 9001, HACCP et ISO 22000, formations et outils qualité.</div>
+      <ul class="pole-list">
+        <li>Diagnostic qualité gratuit</li>
+        <li>Certification ISO 9001, HACCP, ISO 22000</li>
+        <li>Formations : auditeur interne, HACCP, 5S</li>
+        <li>QualiBox : 40 outils qualité gratuits</li>
+      </ul>
+      <a href="qualite.html" class="pole-btn">Découvrir Angy Qualité →</a>
+    </div>
+
+    <div class="pole-card pole-immo pole-avenir fadein">
+      <div class="pole-index">03</div>
       <div class="pole-eyebrow">Immobilier</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-immo-carte.png" alt="Angy Immo">
       <div class="pole-name">Angy Immobilier</div>
@@ -600,7 +623,7 @@ html body .contact-cadre{background:rgba(7,10,20,0.55)!important;-webkit-backdro
     </div>
 
     <div class="pole-card pole-auto pole-avenir fadein">
-      <div class="pole-index">03</div>
+      <div class="pole-index">04</div>
       <div class="pole-eyebrow">Automobile</div><div class="pole-statut">Projet à venir</div>
       <img class="pole-logo" src="images/logo-auto-carte.png" alt="Angy Automobile">
       <div class="pole-name">Angy Automobile</div>
